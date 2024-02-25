@@ -20,7 +20,7 @@ We know the role.  Database contains current world population data.
 
 ### Success End Condition
 
-A report is available for HR to provide to finance.
+A report is available for Organisation.
 
 ### Failed End Condition
 
@@ -32,7 +32,7 @@ The Organisation.
 
 ### Trigger
 
-A request for Country Population information is sent by Data Analyst.
+A request for Country Population information is sent by the organisation.
 
 ## MAIN SUCCESS SCENARIO
 
