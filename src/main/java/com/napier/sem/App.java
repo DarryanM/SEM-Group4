@@ -1,7 +1,6 @@
 package com.napier.sem;
 
 import java.sql.*;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class App {
