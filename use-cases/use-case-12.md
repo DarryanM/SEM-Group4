@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As the Organisation we want to produce a report on the top "N" populated cities in the world, with "N" provided, to allow easy access to this population information
+As the *Organisation* we want to *produce a report on the top "N" populated cities in the world, with "N" provided*, to allow easy access to this population information
 
 ### Scope
 
