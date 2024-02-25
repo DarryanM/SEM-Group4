@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a report on All the countries in the world organised by largest population to smallest
+# USE CASE: 1 Produce a report on TOP N Populated countries in continents
 
 ## CHARACTERISTIC INFORMATION
 
@@ -37,7 +37,7 @@ A request for Top N Countries Population by continents information is by the Org
 ## MAIN SUCCESS SCENARIO
 
 1. Organisation request Top N Countries In Continents Population Report.
-2. Organisation able to extract report of Top N Countries grouped by regions.
+2. Organisation able to extract report of Top N Countries grouped by regions sorted from largest to smallest population.
 
 
 ## EXTENSIONS
