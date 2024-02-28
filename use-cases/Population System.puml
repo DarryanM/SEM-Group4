@@ -1,11 +1,29 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
+actor DA as "Data Analyst"
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+rectangle Database
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+rectangle "World Population" {
+
+    usecase UC1 as "Population of All Countries"
+    usecase UC2 as "Population of All Countries
+     in a Continents"
+    usecase UC3 as "Population of All Countries
+    in a Region"
+
+
+    usecase UCa as "Print Report"
+
+    DA - UC1
+    UC1 ..> UC2 : include
+    UC2 ..> UC3 : include
+    UC3 ..> UCa : include
+
+    'Database - UC1
+}
+
+     Database - UC1
+
 @enduml
