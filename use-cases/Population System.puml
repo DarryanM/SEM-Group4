@@ -16,6 +16,7 @@ rectangle "World Population" {
 
     usecase UCa as "Print Report"
 
+
     DA - UC1
     UC1 ..> UC2 : include
     UC2 ..> UC3 : include
