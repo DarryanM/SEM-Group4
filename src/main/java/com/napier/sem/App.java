@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+
 import java.util.*;
 
 
@@ -12,11 +13,11 @@ public class App {
         // Connect to database
         a.connect();
 
-        // Extract Country Population
-        ArrayList<Country> population = a.getCountryPopulation();
+        // Extract City Population
+        ArrayList<City> cityPop = a.getCityPopulation();
 
         //Display Results
-        a.printCountryPopulation(population);
+        a.printCityPopulation(cityPop);
 
 
         // Disconnect from database
@@ -76,7 +77,7 @@ public class App {
      * Gets the population of all countries.
      * @return A list of all Population sorted in descending order, or null if there is an error.
      */
-    public ArrayList<Country> getCountryPopulation()
+    public ArrayList<City> getCityPopulation()
     {
         try
         {
@@ -84,24 +85,24 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT name, continent, Region, population "
-                            + "FROM country "
+                    "SELECT name, countryCode, district, population "
+                            + "FROM city "
                             + "Order By population DESC "
                             + "Limit 10";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
-            ArrayList<Country> population = new ArrayList<Country>();
+            ArrayList<City> cityPop = new ArrayList<City>();
             while (rset.next())
             {
-                Country pop = new Country();
-                pop.population = rset.getInt("country.population");
-                pop.name = rset.getString("country.Name");
-                pop.continent = rset.getString("country.continent");
-                pop.region = rset.getString("country.region");
-                population.add(pop);
+                City pop = new City();
+                pop.population = rset.getInt("city.population");
+                pop.name = rset.getString("city.Name");
+                pop.district = rset.getString("city.district");
+                pop.countryCode = rset.getString("city.countryCode");
+                cityPop.add(pop);
             }
-            return population;
+            return cityPop;
         }
         catch (Exception e)
         {
@@ -112,21 +113,22 @@ public class App {
     }
     /**
      * Prints a list of Populations.
-     * @param population The list of Population to print.
+     * @param CityPop The list of Population to print.
      */
-    public void printCountryPopulation(ArrayList<Country> population)
+    public void printCityPopulation(ArrayList<City> CityPop)
     {
         // Print header
-        System.out.println(String.format("%-20s ", "All the countries in the world organised by largest population to smallest."));
+        System.out.println(String.format("%-20s ", "All the Cities in the world organised by largest population to smallest."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-20s %-20s %-30s %10s", "Country", "Continent", "Region", "Population"));
+        System.out.println(String.format("%-20s %-20s %-30s %10s", "City Name", "Country Code", "District", "Population"));
         // Loop over all Retrieved Populations in the list
-        for (Country pop : population)
+        for (City pop : CityPop)
         {
 
-            String popCount = String.format("%-20s %-20s %-30s %10s", pop.name, pop.continent, pop.region, pop.population);
+            String popCount = String.format("%-20s %-20s %-30s %10s", pop.name, pop.countryCode, pop.district, pop.population);
             System.out.println(popCount);
         }
     }
-
 }
+
+
