@@ -10,7 +10,7 @@ public class City {
      */
     public String name;
 
-    public String countrycode ;
+    public String countryCode;
 
-    public String district ;
+    public String district;
 }
