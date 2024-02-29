@@ -2,6 +2,8 @@ package com.napier.sem;
 
 import java.sql.*;
 
+import java.util.*;
+
 
 public class App {
     public static void main(String[] args) {
@@ -11,6 +13,11 @@ public class App {
         // Connect to database
         a.connect();
 
+        // Extract City Population
+        ArrayList<City> cityPop = a.getCityPopulation();
+
+        //Display Results
+        a.printCityPopulation(cityPop);
 
 
         // Disconnect from database
@@ -66,5 +73,62 @@ public class App {
             }
         }
     }
+    /**
+     * Gets the population of all countries.
+     * @return A list of all Population sorted in descending order, or null if there is an error.
+     */
+    public ArrayList<City> getCityPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT name, countryCode, district, population "
+                            + "FROM city "
+                            + "Order By population DESC "
+                            + "Limit 10";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Population information
+            ArrayList<City> cityPop = new ArrayList<City>();
+            while (rset.next())
+            {
+                City pop = new City();
+                pop.population = rset.getInt("city.population");
+                pop.name = rset.getString("city.Name");
+                pop.district = rset.getString("city.district");
+                pop.countryCode = rset.getString("city.countryCode");
+                cityPop.add(pop);
+            }
+            return cityPop;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Population details");
+            return null;
+        }
+    }
+    /**
+     * Prints a list of Populations.
+     * @param CityPop The list of Population to print.
+     */
+    public void printCityPopulation(ArrayList<City> CityPop)
+    {
+        // Print header
+        System.out.println(String.format("%-20s ", "All the Cities in the world organised by largest population to smallest."));
+        System.out.println(String.format("%-20s ", " "));
+        System.out.println(String.format("%-20s %-20s %-30s %10s", "City Name", "Country Code", "District", "Population"));
+        // Loop over all Retrieved Populations in the list
+        for (City pop : CityPop)
+        {
 
+            String popCount = String.format("%-20s %-20s %-30s %10s", pop.name, pop.countryCode, pop.district, pop.population);
+            System.out.println(popCount);
+        }
+    }
 }
+
+
