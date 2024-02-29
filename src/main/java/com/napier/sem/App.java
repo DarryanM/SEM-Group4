@@ -23,6 +23,12 @@ public class App {
         //Display Results
         a.printCityPop(cityPop);
 
+        // Extract Country Population
+        ArrayList<Country> population = a.getCountryPopulation();
+
+        //Display Results
+        a.printCountryPopulation(population);
+
 
         // Disconnect from database
         a.disconnect();
@@ -234,7 +240,7 @@ public class App {
         // Print header
         System.out.println(String.format("%-20s ", "All the countries in the world organised by largest population to smallest."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-20s %-20s %-30s %10s", "Name", "Continent", "Region", "Population"));
+        System.out.println(String.format("%-20s %-20s %-30s %10s", "Country", "Continent", "Region", "Population"));
         // Loop over all Retrieved Populations in the list
         for (Country pop : population)
         {
