@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.*;
 
 
 public class App {
@@ -11,6 +12,11 @@ public class App {
         // Connect to database
         a.connect();
 
+        // Extract Country Population
+        ArrayList<Country> population = a.getCountryPopulation();
+
+        //Display Results
+        a.printCountryPopulation(population);
 
 
         // Disconnect from database
@@ -64,6 +70,62 @@ public class App {
             } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
+        }
+    }
+    /**
+     * Gets the population of all countries.
+     * @return A list of all Population sorted in descending order, or null if there is an error.
+     */
+    public ArrayList<Country> getCountryPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT name, continent, Region, population "
+                            + "FROM country "
+                            + "Order By population DESC "
+                            + "Limit 10";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Population information
+            ArrayList<Country> population = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country pop = new Country();
+                pop.population = rset.getInt("country.population");
+                pop.name = rset.getString("country.Name");
+                pop.continent = rset.getString("country.continent");
+                pop.region = rset.getString("country.region");
+                population.add(pop);
+            }
+            return population;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Population details");
+            return null;
+        }
+    }
+    /**
+     * Prints a list of Populations.
+     * @param population The list of Population to print.
+     */
+    public void printCountryPopulation(ArrayList<Country> population)
+    {
+        // Print header
+        System.out.println(String.format("%-20s ", "All the countries in the world organised by largest population to smallest."));
+        System.out.println(String.format("%-20s ", " "));
+        System.out.println(String.format("%-20s %-20s %-30s %10s", "Country", "Continent", "Region", "Population"));
+        // Loop over all Retrieved Populations in the list
+        for (Country pop : population)
+        {
+
+            String popCount = String.format("%-20s %-20s %-30s %10s", pop.name, pop.continent, pop.region, pop.population);
+            System.out.println(popCount);
         }
     }
 
