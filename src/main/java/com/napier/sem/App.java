@@ -86,7 +86,7 @@ public class App {
         }
     }
 
-    public ArrayList<City> getCityPop()
+    public ArrayList<City> getCityPopulation()
     {
         try
         {
@@ -140,7 +140,7 @@ public class App {
      * Gets the population of all countries.
      * @return A list of all Population sorted in descending order, or null if there is an error.
      */
-    public ArrayList<City> getCityPopulation()
+    public ArrayList<City> getCityPop()
     {
         try
         {
