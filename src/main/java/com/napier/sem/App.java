@@ -332,7 +332,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
 
-                    "WITH city1 as (select city.name as name, country.continent as continet, city.population as population, RANK () " +
+                    "WITH city1 as (select city.name as name, country.continent as continent, city.population as population, RANK () " +
                             "OVER(PARTITION BY continent ORDER BY population DESC) row_num " +
                             "FROM city inner join country on city.countrycode = country.code) " +
                             "SELECT * FROM city1  WHERE row_num <=3";
