@@ -29,6 +29,11 @@ public class App {
         //Display Results
         a.printCountryPopulation(population);
 
+        // Extract Top Countries Continent Population
+        ArrayList<Country> nPopulation = a.getTopCountryPopulation();
+
+        //Display Results
+        a.printTopCountryPopulation(nPopulation);
 
         // Disconnect from database
         a.disconnect();
@@ -249,6 +254,67 @@ public class App {
             System.out.println(popCount);
         }
     }
+
+    /**
+     * Gets the population of Top N all countries.
+     * @return A list of all Population sorted in descending order, or null if there is an error.
+     */
+    public ArrayList<Country> getTopCountryPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "with country as (select name, continent, population, row_number() over " +
+                            "(partition by continent order by population desc, continent desc) as row_num from country) " +
+                            "select row_num, name, continent, population from country where row_num <=3";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Population information
+            ArrayList<Country> nPopulation = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country pop = new Country();
+                pop.population = rset.getInt("country.population");
+                pop.name = rset.getString("country.Name");
+                pop.continent = rset.getString("country.continent");
+                pop.row_num = rset.getInt("country.row_num");
+                nPopulation.add(pop);
+            }
+            return nPopulation;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Population details");
+            return null;
+        }
+    }
+    /**
+     * Prints a list of Populations.
+     * @param nPopulation The list of Population to print.
+     */
+    public void printTopCountryPopulation(ArrayList<Country> nPopulation)
+    {
+        // Print header
+        System.out.println(String.format("%-20s ", "All the TOP countries in the world organised by largest population to smallest."));
+        System.out.println(String.format("%-20s ", " "));
+        System.out.println(String.format("%10s %-20s %-20s %10s", "row_num", "Country", "Continent", "Population" ));
+        // Loop over all Retrieved Populations in the list
+        for (Country pop : nPopulation)
+        {
+
+            String popCount = String.format("%10s %-20s %-20s %10s",pop.row_num, pop.name, pop.continent, pop.population);
+            System.out.println(popCount);
+        }
+    }
 }
+
+
+
 
 
