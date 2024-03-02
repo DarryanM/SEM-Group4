@@ -15,4 +15,8 @@ public class City {
     public String district;
 
     public String country;
+
+    public String continent;
+
+    public int row_num;
 }

@@ -35,6 +35,12 @@ public class App {
         //Display Results
         a.printTopCountryPopulation(nPopulation);
 
+        // Extract Top City Population in a Continent
+        ArrayList<City> nCityPop = a.getTopCityPopulation();
+
+        //Display Results
+        a.printTopCityPopulation(nCityPop);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -309,6 +315,63 @@ public class App {
         {
 
             String popCount = String.format("%10s %-20s %-20s %10s",pop.row_num, pop.name, pop.continent, pop.population);
+            System.out.println(popCount);
+        }
+
+    }
+    /**
+     * Gets the population of Top N all cities.
+     * @return A list of all Population sorted in descending order, or null if there is an error.
+     */
+    public ArrayList<City> getTopCityPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "WITH city1 as (select city.name as name, country.continent as continet, city.population as population, RANK () " +
+                            "OVER(PARTITION BY continent ORDER BY population DESC) row_num " +
+                            "FROM city inner join country on city.countrycode = country.code) " +
+                            "SELECT * FROM city1  WHERE row_num <=3";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Population information
+            ArrayList<City> nCityPop = new ArrayList<City>();
+            while (rset.next())
+            {
+                City pop = new City();
+                pop.population = rset.getInt("population");
+                pop.name = rset.getString("Name");
+                pop.continent = rset.getString("continent");
+                pop.row_num = rset.getInt("row_num");
+                nCityPop.add(pop);
+            }
+            return nCityPop;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Population details");
+            return null;
+        }
+    }
+    /**
+     * Prints a list of Populations.
+     * @param nCityPop The list of Population to print.
+     */
+    public void printTopCityPopulation(ArrayList<City> nCityPop) {
+        // Print header
+        System.out.println(String.format("%-20s ", "The top N populated cities in a continent where N is provided by the user."));
+        System.out.println(String.format("%-20s ", " "));
+        System.out.println(String.format("%10s %-30s %-30s %10s", "row_num", "Country", "Continent", "Population"));
+        // Loop over all Retrieved Populations in the list
+        for (City pop : nCityPop) {
+
+            String popCount = String.format("%10s %-30s %-30s %10s", pop.row_num, pop.name, pop.continent, pop.population);
             System.out.println(popCount);
         }
     }
