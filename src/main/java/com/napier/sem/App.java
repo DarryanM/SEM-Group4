@@ -41,6 +41,12 @@ public class App {
         //Display Results
         a.printTopCityPopulation(nCityPop);
 
+        // Extract district population information
+        ArrayList<City> districtPopulation = a.getDistrictPopulation();
+
+        // Display district population results
+        a.printDistrictPopulation(districtPopulation);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -359,6 +365,35 @@ public class App {
             return null;
         }
     }
+
+    public ArrayList<City> getDistrictPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.name AS city, city.district, city.population " +
+                            "FROM city " +
+                            "ORDER BY district , population DESC " +
+                            "LIMIT 30";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Population information
+            ArrayList<City> population11 = new ArrayList<>();
+            while (rset.next()) {
+                City district = new City();
+                district.population = rset.getInt("population");
+                district.name = rset.getString("city");
+                district.district = rset.getString("district");
+                population11.add(district);
+            }
+            return population11;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get district population details");
+            return null;
+        }
+    }
     /**
      * Prints a list of Populations.
      * @param nCityPop The list of Population to print.
@@ -372,6 +407,17 @@ public class App {
         for (City pop : nCityPop) {
 
             String popCount = String.format("%10s %-30s %-30s %10s", pop.row_num, pop.name, pop.continent, pop.population);
+            System.out.println(popCount);
+        }
+    }
+
+    public void printDistrictPopulation(ArrayList<City> population11) {
+        // Print header
+        System.out.println(String.format("Cities in a district from largest to smallest population"));
+        System.out.println(String.format("%-20s %-20s %30s", "City Name", "District", "Population"));
+        // Loop over all retrieved populations in the list
+        for (City district : population11) {
+            String popCount = String.format("%-20s %-20s %30s", district.name, district.district, district.population);
             System.out.println(popCount);
         }
     }
