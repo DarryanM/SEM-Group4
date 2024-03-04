@@ -312,6 +312,7 @@ public class App {
         System.out.println(String.format("%10s %-20s %-20s %10s", "row_num", "Country", "Continent", "Population" ));
         // Loop over all Retrieved Populations in the list
         for (Country pop : nPopulation)
+        
         {
 
             String popCount = String.format("%10s %-20s %-20s %10s",pop.row_num, pop.name, pop.continent, pop.population);
