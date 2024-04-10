@@ -45,4 +45,5 @@ public class AppTest
         population.add(pop);
         app.printCountryPopulation(population);
     }
+
 }

@@ -716,6 +716,7 @@ public class App {
      *
      * @return A list of the population of all countries in a Region  sorted in descending order, or null if there is an error.
      */
+
     public ArrayList<Country> getRegionPopulation() {
         try {
             // Create an SQL statement
