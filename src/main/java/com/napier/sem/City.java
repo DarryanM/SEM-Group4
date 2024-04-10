@@ -22,4 +22,6 @@ public class City {
 
     public String region;
 
+
+
 }
