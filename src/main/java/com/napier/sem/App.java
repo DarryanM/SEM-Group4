@@ -207,7 +207,7 @@ public class App {
             return;
         }
 
-        // Print header
+        // Print  header
         System.out.println(String.format("%-20s ", "All the countries in the world organised by largest population to smallest."));
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-10s %10s %-50s %10s %-30s %-30s", "Code", "Population", "Country", "Capital", "Continent", "Region"));
