@@ -21,4 +21,5 @@ public class City {
     public int row_num;
 
     public String region;
+
 }

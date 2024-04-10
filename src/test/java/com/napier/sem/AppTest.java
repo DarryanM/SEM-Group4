@@ -18,6 +18,7 @@ public class AppTest
         app = new App();
     }
 
+
     @Test
     void printCountryPopulationTestNull()
     {
@@ -45,5 +46,6 @@ public class AppTest
         population.add(pop);
         app.printCountryPopulation(population);
     }
+
 
 }
