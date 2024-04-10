@@ -1,11 +1,15 @@
 version: '3'
 services:
   # Application Dockerfile is in same folder which is .
-  app:
+  World-Pop-App:
+    image: world-pop-reports
+    container_name: reports
     build: .
 
   # db is is db folder
-  db:
+  World-Pop-DB:
+    image: world-pop-db
+    container_name: world_db
     build: db/.
     command: --default-authentication-plugin=mysql_native_password
     restart: always
