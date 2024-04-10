@@ -206,6 +206,7 @@ public class App {
             System.out.println("No Countries");
             return;
         }
+
         // Print  header
         System.out.println(String.format("%-20s ", "All the countries in the world organised by largest population to smallest."));
         System.out.println(String.format("%-20s ", " "));
@@ -266,6 +267,14 @@ public class App {
      * @param CityPop7 The list of All Cities in the world Population to print.
      */
     public void printCityPop(ArrayList<City> CityPop7) {
+
+        // Check employees is not null
+        if (CityPop7 == null)
+        {
+            System.out.println("No Countries");
+            return;
+        }
+
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "All the Cities in the world organised by largest population to smallest."));
@@ -274,7 +283,10 @@ public class App {
         // Loop over all Retrieved Populations in the list
         for (City pop : CityPop7) {
 
-            String popCount = String.format("%-20s %-20s %-20s %-30s %10s", pop.countryCode, pop.name, pop.country, pop.district, pop.population);
+            if (pop == null)
+                continue;
+
+            String popCount = String.format("%-20s %-20s %-20s %-30s %10s", pop.countryCode, pop.name, pop.countryCode, pop.district, pop.population);
             System.out.println(popCount);
         }
     }
@@ -423,21 +435,12 @@ public class App {
      * @param nCityPop The list of Population to print.
      */
     public void printTopCityPopulation(ArrayList<City> nCityPop) {
-        // Check employees is not null
-        if (nCityPop == null)
-        {
-            System.out.println("No Top Population");
-            return;
-        }
         // Print header
         System.out.println(String.format("%-20s ", "The top N populated cities in a continent where N is provided by the user."));
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%10s %-30s %-30s %-30s %-30s %10s", "row_num", "City", "Country", "District", "Continent", "Population"));
         // Loop over all Retrieved Populations in the list
         for (City pop : nCityPop) {
-
-            if (pop == null)
-                continue;
 
             String popCount = String.format("%10s %-30s %-30s %-30s %-30s %10s", pop.row_num, pop.name, pop.country, pop.district, pop.continent, pop.population);
             System.out.println(popCount);
@@ -543,6 +546,13 @@ public class App {
      * @param CityPop8 The list of All Cities in a continent Population to print.
      */
     public void printCityPop8(ArrayList<City> CityPop8) {
+
+        // Check employees is not null
+        if (CityPop8 == null)
+        {
+            System.out.println("No Cities in a continent");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "All the Cities in a continent organised by largest population to smallest."));
@@ -550,6 +560,9 @@ public class App {
         System.out.println(String.format("%-20s %-20s %-20s %-30s %10s", "Country Code", "city", "Country", "Continent", "Population"));
         // Loop over all Retrieved Populations in the list
         for (City pop : CityPop8) {
+
+            if (pop == null)
+                continue;
 
             String popCount = String.format("%-20s %-20s %-20s %-30s %10s", pop.countryCode, pop.name, pop.country, pop.continent, pop.population);
             System.out.println(popCount);
@@ -878,6 +891,13 @@ public class App {
      * @param CityPop9 The list of All Cities in a region Population to print.
      */
     public void printCityPop9(ArrayList<City> CityPop9) {
+
+        // Check employees is not null
+        if (CityPop9 == null)
+        {
+            System.out.println("No Cities in a region");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "All the Cities in a region organised by largest population to smallest."));
@@ -885,6 +905,9 @@ public class App {
         System.out.println(String.format("%-20s %-20s %-20s %-30s %10s", "Country Code", "city", "Country", "Region", "Population"));
         // Loop over all Retrieved Populations in the list
         for (City pop : CityPop9) {
+
+            if (pop == null)
+                continue;
 
             String popCount = String.format("%-20s %-20s %-20s %-30s %10s", pop.countryCode, pop.name, pop.country, pop.region, pop.population);
             System.out.println(popCount);

@@ -90,6 +90,92 @@ public class AppTest
         nCityPop.add(pop);
         app.printTopCityPopulation(nCityPop);
     }
+//Test for City in the World City pop7
+    @Test
+    void printCityPopTestNull()
+    {
+        app.printCityPop(null);
+    }
+
+    @Test
+    void printCityPopTestEmpty()
+    {
+        ArrayList<City>CityPop7 = new ArrayList<City>();
+        app.printCityPop(CityPop7);
+    }
+
+    @Test
+    void printCityPop()
+    {
+        ArrayList<City> CityPop7 = new ArrayList<City>();
+        City pop = new City();
+        pop.countryCode = "USA";
+        pop.population = 8008278;
+        pop.name = "United States";
+        pop.district = "New York";
+         CityPop7.add(pop);
+        app. printCityPop(CityPop7);
+    }
+//Test for City in a continent City pop8
+
+    @Test
+    void printCityPop8TestNull()
+    {
+        app.printCityPop8(null);
+    }
+
+    @Test
+    void printCityPop8TestEmpty()
+    {
+        ArrayList<City>CityPop8 = new ArrayList<City>();
+        app.printCityPop8(CityPop8);
+    }
+
+    @Test
+    void printCityPop8()
+    {
+        ArrayList<City> CityPop8 = new ArrayList<City>();
+        City pop = new City();
+        pop.countryCode = "USA";
+        pop.population = 8008278;
+        pop.name = "United States";
+        pop.country = "New York";
+        pop.region = " New York";
+        CityPop8.add(pop);
+        app. printCityPop8(CityPop8);
+    }
+
+    //Test for City in a Region City pop9
+
+    @Test
+    void printCityPop9TestNull()
+    {
+        app.printCityPop9(null);
+    }
+
+    @Test
+    void printCityPop9TestEmpty()
+    {
+        ArrayList<City>CityPop9 = new ArrayList<City>();
+        app.printCityPop9(CityPop9);
+    }
+
+    @Test
+    void printCityPop9()
+    {
+        ArrayList<City> CityPop9 = new ArrayList<City>();
+        City pop = new City();
+        pop.countryCode = "USA";
+        pop.population = 8008278;
+        pop.name = "United States";
+        pop.country = "New York";
+        pop.region = "New York";
+        CityPop9.add(pop);
+        app. printCityPop9(CityPop9);
+    }
+
+
+
 
 
 }
