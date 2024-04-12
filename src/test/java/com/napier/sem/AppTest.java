@@ -18,26 +18,7 @@ public class AppTest
         app = new App();
     }
 
-    @Test
-    void printGetTopNCityPopWorld12TestEmpty()
-    {
-        ArrayList<City> topNCityPopWorld12 = new ArrayList<City>();
-        app.printGetTopNCityPopWorld12(topNCityPopWorld12);
-    }
 
-    @Test
-    void printGetTopNCityPopWorld12()
-    {
-        ArrayList<City> topNCityPopWorld12 = new ArrayList<City>();
-        City pop = new City();
-        pop.population = 10000;
-       pop.name = "city";
-        pop.country = "country";
-        pop.row_num = 40;
-        pop.district = "district";
-        topNCityPopWorld12.add(pop);
-        app.printGetTopNCityPopWorld12(topNCityPopWorld12);
-    }
 
     // Testing of print Country By Population Method
     @Test
@@ -255,12 +236,7 @@ public class AppTest
         app.printTopCityPopulation(nCityPop);
     }
 
-    @Test
-    void printGetTopNCityPopWorld12TestContainsNull()
-    {
-        ArrayList<City> topNCityPopWorld12 = new ArrayList<City>();
-        app.printGetTopNCityPopWorld12(topNCityPopWorld12);
-    }
+
 
 //Test for City in the World City pop7
     @Test
@@ -474,11 +450,43 @@ public class AppTest
         app.printTopNCountriesInRegPopulation(topNCountriesRegPop);
     }
 
+
     // tests for printGetTopNCityPopWorld12
     @Test
     void printGetTopNCityPopWorld12TestNull()
     {
         app.printGetTopNCityPopWorld12(null);
     }
+
+    @Test
+    void printGetTopNCityPopWorld12TestContainsNull()
+    {
+        ArrayList<City> topNCityPopWorld12 = new ArrayList<City>();
+        app.printGetTopNCityPopWorld12(topNCityPopWorld12);
+    }
+
+    @Test
+    void printGetTopNCityPopWorld12TestEmpty()
+    {
+        ArrayList<City> topNCityPopWorld12 = new ArrayList<City>();
+        app.printGetTopNCityPopWorld12(topNCityPopWorld12);
+    }
+
+    @Test
+    void printGetTopNCityPopWorld12()
+    {
+        ArrayList<City> topNCityPopWorld12 = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 10000;
+        pop.name = "city";
+        pop.country = "country";
+        pop.row_num = 40;
+        pop.district = "district";
+        topNCityPopWorld12.add(pop);
+        app.printGetTopNCityPopWorld12(topNCityPopWorld12);
+    }
+
+
+
 
 }
