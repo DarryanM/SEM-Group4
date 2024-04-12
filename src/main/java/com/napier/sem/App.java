@@ -770,12 +770,22 @@ public class App {
      * @param nCityTopReg The list of Population to print.
      */
     public void printTopCityInRegion(ArrayList<City> nCityTopReg) {
+
+        //Null test
+        if(nCityTopReg == null)
+        {
+            System.out.println("No Cities");
+            return;
+        }
+
         // Print header
         System.out.println(String.format("%-20s ", "The top N populated cities in a region where N is provided by the user."));
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%10s %-30s %-30s %-30s %-30s %10s", "row_num", "City", "Country", "District", "Region", "Population"));
         // Loop over all Retrieved Populations in the list
         for (City pop : nCityTopReg) {
+
+            if (pop == null) continue;
 
             String popCount = String.format("%10s %-30s %-30s %-30s %-30s %10s", pop.row_num, pop.name, pop.country, pop.district, pop.region, pop.population);
             System.out.println(popCount);
@@ -1093,12 +1103,22 @@ public class App {
      * @param nCityTopCtry The list of Population to print.
      */
     public void printTopCityInCountry(ArrayList<City> nCityTopCtry) {
+
+        // Check countries is not null
+        if (nCityTopCtry == null)
+        {
+            System.out.println("No Cities");
+            return;
+        }
+
         // Print header
         System.out.println(String.format("%-20s ", "The top N populated cities in a country where N is provided by the user."));
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%10s %-30s %-30s %-30s %10s", "row_num", "City", "Country", "District", "Population"));
         // Loop over all Retrieved Populations in the list
         for (City pop : nCityTopCtry) {
+
+            if(pop == null) continue;
 
             String popCount = String.format("%10s %-30s %-30s %-30s %10s", pop.row_num, pop.name, pop.country, pop.district, pop.population);
             System.out.println(popCount);
