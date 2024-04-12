@@ -176,6 +176,14 @@ public class AppTest
     }
 
     @Test
+    void printCityPopTestContainsNull()
+    {
+        ArrayList<City> CityPop7 = new ArrayList<City>();
+        CityPop7.add(null);
+        app.printCityPop(CityPop7);
+    }
+
+    @Test
     void printCityPopTestEmpty()
     {
         ArrayList<City>CityPop7 = new ArrayList<City>();
@@ -200,6 +208,14 @@ public class AppTest
     void printCityPop8TestNull()
     {
         app.printCityPop8(null);
+    }
+
+    @Test
+    void printCityPop8TestContainsNull()
+    {
+        ArrayList<City> CityPop8 = new ArrayList<City>();
+        CityPop8.add(null);
+        app.printCityPop8(CityPop8);
     }
 
     @Test
@@ -229,6 +245,14 @@ public class AppTest
     void printCityPop9TestNull()
     {
         app.printCityPop9(null);
+    }
+
+    @Test
+    void printCityPop9TestContainsNull()
+    {
+        ArrayList<City> CityPop9 = new ArrayList<City>();
+        CityPop9.add(null);
+        app.printCityPop9(CityPop9);
     }
 
     @Test
