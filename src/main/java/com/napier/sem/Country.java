@@ -16,4 +16,8 @@ public class Country {
     public String code;
     public int row_num;
 
+    public City country;
+
+    public City district;
+
 }
