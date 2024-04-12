@@ -19,6 +19,7 @@ public class AppTest
     }
 
 
+    // Testing of print Country By Population Method
     @Test
     void printCountryPopulationTestNull()
     {
@@ -55,6 +56,81 @@ public class AppTest
         app.printCountryPopulation(population);
     }
 
+    // Testing of print Continent By Population Method
+    @Test
+    void printContinentPopulationTestNull()
+    {
+        app.printContinentPopulation(null);
+    }
+
+    @Test
+    void printContinentPopulationTestContainsNull()
+    {
+        ArrayList<Country> population2 = new ArrayList<Country>();
+        population2.add(null);
+        app.printContinentPopulation(population2);
+    }
+
+    @Test
+    void printContinentPopulationTestEmpty()
+    {
+        ArrayList<Country> population2 = new ArrayList<Country>();
+        app.printContinentPopulation(population2);
+    }
+
+    @Test
+    void printContinentPopulation()
+    {
+        ArrayList<Country> population2 = new ArrayList<Country>();
+        Country pop = new Country();
+        pop.code = "ABW";
+        pop.population = 103000;
+        pop.name = "Aruba";
+        pop.capital = 129;
+        pop.continent = "North America";
+        pop.region = "Caribbean";
+        population2.add(pop);
+        app.printContinentPopulation(population2);
+    }
+
+    // Testing of print Region By Population Method
+    @Test
+    void printRegionPopulationTestNull()
+    {
+        app.printRegionPopulation(null);
+    }
+
+    @Test
+    void printRegionPopulationTestContainsNull()
+    {
+        ArrayList<Country> population3 = new ArrayList<Country>();
+        population3.add(null);
+        app.printRegionPopulation(population3);
+    }
+
+    @Test
+    void printRegionPopulationTestEmpty()
+    {
+        ArrayList<Country> population3 = new ArrayList<Country>();
+        app.printRegionPopulation(population3);
+    }
+
+    @Test
+    void printRegionPopulation()
+    {
+        ArrayList<Country> population3 = new ArrayList<Country>();
+        Country pop = new Country();
+        pop.code = "ABW";
+        pop.population = 103000;
+        pop.name = "Aruba";
+        pop.capital = 129;
+        pop.continent = "North America";
+        pop.region = "Caribbean";
+        population3.add(pop);
+        app.printRegionPopulation(population3);
+    }
+
+
     @Test
     void printTopCityPopulationTestNull()
     {
@@ -90,6 +166,8 @@ public class AppTest
         nCityPop.add(pop);
         app.printTopCityPopulation(nCityPop);
     }
+
+
 //Test for City in the World City pop7
     @Test
     void printCityPopTestNull()
