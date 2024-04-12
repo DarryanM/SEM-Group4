@@ -310,11 +310,6 @@ public class AppTest
         app.printTopNCountryPopulation(topPopulation);
     }
 
-
-
-
-
-
     @Test
     void printTopNCountriesInContPopulationTestNull()
     {
@@ -350,9 +345,40 @@ public class AppTest
         app.printTopNCountriesInContPopulation(topNCountriesContPop);
     }
 
+    @Test
+    void printTopNCountriesInRegPopulationTestNull()
+    {
+        app.printTopNCountriesInRegPopulation(null);
+    }
+    @Test
+    void printTopNCountriesInRegPopulationTestContainsNull()
+    {
+        ArrayList<Country> topNCountriesRegPop = new ArrayList<Country>();
+        topNCountriesRegPop.add(null);
+        app.printTopNCountriesInRegPopulation(topNCountriesRegPop);
+    }
+    @Test
+    void printTopNCountriesInRegPopulationTestEmpty()
+    {
+        ArrayList<Country> topNCountriesRegPop = new ArrayList<Country>();
+        app.printTopNCountriesInRegPopulation(topNCountriesRegPop);
+    }
 
-
-
+    @Test
+    void printTopNCountriesInRegPopulation()
+    {
+        ArrayList<Country> topNCountriesRegPop = new ArrayList<Country>();
+        Country pop = new Country();
+        pop.row_num = 0;
+        pop.code = "NGA";
+        pop.population = 111506000;
+        pop.name = "Nigeria";
+        pop.capital = 2754;
+        pop.continent = "Africa";
+        pop.region = "Western Africa ";
+        topNCountriesRegPop.add(pop);
+        app.printTopNCountriesInRegPopulation(topNCountriesRegPop);
+    }
 
 
 }

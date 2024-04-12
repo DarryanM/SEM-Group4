@@ -1009,6 +1009,14 @@ public class App {
      * @param topNCountriesRegPop The list of Top N Countries in a Region to print.
      */
     public void printTopNCountriesInRegPopulation(ArrayList<Country> topNCountriesRegPop) {
+
+        // Check countries is not null
+        if (topNCountriesRegPop == null)
+        {
+            System.out.println("No Countries");
+            return;
+        }
+
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "All the TOP N countries in a Region with N value provided by user."));
@@ -1016,6 +1024,9 @@ public class App {
         System.out.println(String.format("%-10s %-10s %10s %-50s %-20s %-25s %-30s", "row_num", "Code", "Population", "Country", "Capital", "Continent", "Region"));
         // Loop over all Retrieved Populations in the list
         for (Country pop : topNCountriesRegPop) {
+
+            if (pop == null)
+                continue;
 
             String popCount = String.format("%-10s %-10s %10s %-50s %-20s %-25s %-30s", pop.row_num, pop.code, pop.population, pop.name, pop.capital, pop.continent, pop.region);
             System.out.println(popCount);
