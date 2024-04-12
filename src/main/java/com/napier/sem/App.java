@@ -710,16 +710,25 @@ public class App {
      * Prints the list of cities in a district from largest to smallest population"
      */
     public void printDistrictPopulation(ArrayList<City> districtpopulation11) {
+        if (districtpopulation11 == null)
+        {
+            System.out.println("No Countries");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("Cities in a district from largest to smallest population"));
         System.out.println(String.format("%-20s %-30s %-20s %-30s", "City Name", "Country", "District", "Population"));
         // Loop over all retrieved populations in the list
         for (City district : districtpopulation11) {
+
+            if (district == null)
+                continue;
             String popCount = String.format("%-20s %-30s %-20s %-30s", district.name, district.country, district.district, district.population);
             System.out.println(popCount);
         }
     }
+
 
     public ArrayList<City> getTopCityInRegion() {
         try {
@@ -883,18 +892,30 @@ public class App {
      * @param topNCityPopWorld12 The list of Population to print.
      */
     public void printGetTopNCityPopWorld12(ArrayList<City> topNCityPopWorld12) {
+        if (topNCityPopWorld12 == null)
+        {
+            System.out.println("No Countries");
+            return;
+        }
+
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "The top N populated cities in the world where N is provided by the user."));
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%10s %-30s %-30s %-30s %-30s", "row_num", "City", "Country", "District", "Population"));
         // Loop over all Retrieved Populations in the list
+
         for (City pop : topNCityPopWorld12) {
+
+            if (pop == null)
+                continue;
+
 
             String popCount = String.format("%10s %-30s %-30s %-30s %-30s", pop.row_num, pop.name, pop.country, pop.district, pop.population);
             System.out.println(popCount);
         }
     }
+
 
     /**
      * Gets All the cities in a Region.
