@@ -382,6 +382,15 @@ public class App {
      * @param topPopulation The list of Population to print.
      */
     public void printTopNCountryPopulation(ArrayList<Country> topPopulation) {
+
+        // Check countries is not null
+        if (topPopulation == null)
+        {
+            System.out.println("No Countries");
+            return;
+        }
+
+
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "All the Top N countries in the world with N provided by user."));
@@ -389,6 +398,9 @@ public class App {
         System.out.println(String.format("%-10s %10s %-50s %-30s %-30s %-30s", "Code", "Population", "Country", "Capital", "Continent", "Region"));
         // Loop over all Retrieved Populations in the list
         for (Country pop : topPopulation) {
+
+            if (pop == null)
+                continue;
 
             String popCount = String.format("%-10s %10s %-50s %-30s %-30s %-30s", pop.code, pop.population, pop.name, pop.capital, pop.continent, pop.region);
             System.out.println(popCount);
@@ -615,6 +627,15 @@ public class App {
      * @param topNCountriesContPop The list of Top N Countries in a Continent to print.
      */
     public void printTopNCountriesInContPopulation(ArrayList<Country> topNCountriesContPop) {
+
+        // Check countries is not null
+        if (topNCountriesContPop == null)
+        {
+            System.out.println("No Countries");
+            return;
+        }
+
+
         // Print header
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "All the TOP N countries in a Continent with N value provided by user."));
@@ -622,6 +643,9 @@ public class App {
         System.out.println(String.format("-%10s %-10s %10s %-50s %-30s %-30s %-30s", "row_num", "Code", "Population", "Country", "Capital", "Continent", "Region"));
         // Loop over all Retrieved Populations in the list
         for (Country pop : topNCountriesContPop) {
+
+            if (pop == null)
+                continue;
 
             String popCount = String.format("-%10s %-10s %10s %-50s %-30s %-30s %-30s", pop.row_num, pop.code, pop.population, pop.name, pop.capital, pop.continent, pop.region);
             System.out.println(popCount);

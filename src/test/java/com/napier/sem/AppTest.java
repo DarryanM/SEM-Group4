@@ -174,6 +174,81 @@ public class AppTest
         app. printCityPop9(CityPop9);
     }
 
+    @Test
+    void printTopNCountryPopulationTestNull()
+    {
+        app.printTopNCountryPopulation(null);
+    }
+    @Test
+    void printTopNCountryPopulationTestContainsNull()
+    {
+        ArrayList<Country> topPopulation = new ArrayList<Country>();
+        topPopulation.add(null);
+        app.printTopNCountryPopulation(topPopulation);
+    }
+    @Test
+    void printTopNCountryPopulationTestEmpty()
+    {
+        ArrayList<Country> topPopulation = new ArrayList<Country>();
+        app.printTopNCountryPopulation(topPopulation);
+    }
+
+    @Test
+    void printTopNCountryPopulation()
+    {
+        ArrayList<Country> topPopulation = new ArrayList<Country>();
+        Country pop = new Country();
+        pop.population = 111506000;
+        pop.code = "NGA";
+        pop.capital = 2754;
+        pop.name = "Nigeria";
+        pop.continent = "Africa";
+        pop.region = "Western Africa ";
+        topPopulation.add(pop);
+        app.printTopNCountryPopulation(topPopulation);
+    }
+
+
+
+
+
+
+    @Test
+    void printTopNCountriesInContPopulationTestNull()
+    {
+        app.printTopNCountriesInContPopulation(null);
+    }
+    @Test
+    void printTopNCountriesInContPopulationTestContainsNull()
+    {
+        ArrayList<Country> topNCountriesContPop = new ArrayList<Country>();
+        topNCountriesContPop.add(null);
+        app.printTopNCountriesInContPopulation(topNCountriesContPop);
+    }
+    @Test
+    void printTopNCountriesInContPopulationTestEmpty()
+    {
+        ArrayList<Country> topNCountriesContPop = new ArrayList<Country>();
+        app.printTopNCountriesInContPopulation(topNCountriesContPop);
+    }
+
+    @Test
+    void printTopNCountriesInContPopulation()
+    {
+        ArrayList<Country> topNCountriesContPop = new ArrayList<Country>();
+        Country pop = new Country();
+        pop.row_num = 0;
+        pop.code = "NGA";
+        pop.population = 111506000;
+        pop.name = "Nigeria";
+        pop.capital = 2754;
+        pop.continent = "Africa";
+        pop.region = "Western Africa ";
+        topNCountriesContPop.add(pop);
+        app.printTopNCountriesInContPopulation(topNCountriesContPop);
+    }
+
+
 
 
 
