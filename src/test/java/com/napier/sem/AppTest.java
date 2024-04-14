@@ -487,6 +487,78 @@ public class AppTest
     }
 
 
+    // TESTS FOR printTopCityInCountry
+    @Test
+    void printTopCityInRegionTestNull()
+    {
+        app.printTopCityInRegion(null);
+    }
+
+    @Test
+    void printTopCityInRegionContainsNull()
+    {
+        ArrayList<City> TopCityInRegion = new ArrayList<City>();
+        TopCityInRegion.add(null);
+        app.printTopCityInRegion(TopCityInRegion);
+    }
+
+    @Test
+    void printTopCityInRegionTestEmpty()
+    {
+        ArrayList<City> TopCityInRegion = new ArrayList<City>();
+        app.printTopCityInRegion(TopCityInRegion);
+    }
+
+    @Test
+    void printTopCityInRegion()
+    {
+        ArrayList<City> nCityTopReg = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 100000;
+        pop.name = "Name";
+        pop.country = "Country";
+        pop.region = "region";
+        pop.district = "district";
+        pop.row_num = 1;
+        nCityTopReg.add(pop);
+        app.printTopCityInRegion(nCityTopReg);
+    }
 
 
-}
+    // TESTS FOR printTopCityInCountry
+    @Test
+    void printTopCityInCountryTestNull()
+    {
+        app.printTopCityInCountry(null);
+    }
+
+    @Test
+    void printTopCityInCountryNull()
+    {
+        ArrayList<City> TopCityInCountry = new ArrayList<City>();
+        TopCityInCountry.add(null);
+        app.printTopCityInCountry(TopCityInCountry);
+    }
+
+    @Test
+    void printTopCityInCountryTestEmpty()
+    {
+        ArrayList<City> TopCityInCountry = new ArrayList<City>();
+        app.printTopCityInCountry(TopCityInCountry);
+    }
+
+    @Test
+    void printTopCityInCountry() {
+        ArrayList<City> nCityTopCtry= new ArrayList<City>();
+        City pop = new City();
+        pop.population = 100000;
+        pop.name = "Name";
+        pop.country = "Country";
+        pop.district = "district";
+        pop.row_num = 1;
+        nCityTopCtry.add(pop);
+        app.printTopCityInCountry(nCityTopCtry);
+    }
+
+
+    }
