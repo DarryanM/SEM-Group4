@@ -20,7 +20,7 @@ public class AppTest
 
 
 
-    // Testing of print Country By Population Method
+    // Testing of Country By Population print Method
     @Test
     void printCountryPopulationTestNull()
     {
@@ -57,7 +57,7 @@ public class AppTest
         app.printCountryPopulation(population);
     }
 
-    // Testing of print Continent By Population Method
+    // Testing of Continent By Population print Method
     @Test
     void printContinentPopulationTestNull()
     {
@@ -94,7 +94,7 @@ public class AppTest
         app.printContinentPopulation(population2);
     }
 
-    // Testing of print Region By Population Method
+    // Testing of Region By Population print Method
     @Test
     void printRegionPopulationTestNull()
     {
