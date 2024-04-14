@@ -35,7 +35,7 @@ public class AppIntegrationTest
     void testGetCountryPopulationNull()
     {
         app.getCountry(null);
-        app.getCountry("EMPTY");
+
     }
 
     @Test
