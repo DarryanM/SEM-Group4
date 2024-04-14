@@ -15,6 +15,9 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
+        //Get Country information
+        Country pop = a.getCountry("Aruba");
+
         // Extract Country Population
         ArrayList<Country> population = a.getCountryPopulation();
 
@@ -1117,15 +1120,15 @@ public class App {
         }
     }
 
-    public Country getCountry(String code) {
+    public Country getCountry(String code1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "select code, population, continent, name, country, region "
+                    "select code, population, continent, name, region "
                             + "From country "
-                            + "WHERE code = " + code;
+                            + "WHERE name = 'Aruba'";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1137,8 +1140,7 @@ public class App {
                 pop.population = rset.getInt("population");
                 pop.continent = rset.getString("continent");
                 pop.name = rset.getString("name");
-                pop.country = rset.getString("country");
-                pop.region = rset.getString("code");
+                pop.region = rset.getString("region");
                 return pop;
             } else
                 return null;
@@ -1149,15 +1151,23 @@ public class App {
         }
     }
 
-    public void displayCountry(Country pop) {
-        if (pop != null) {
-            System.out.println(
-                    pop.code + " "
-                            + pop.population + " "
-                            + pop.continent + "\n"
-                            + pop.name + "\n"
-                            + pop.country + "\n"
-                            + pop.region + "\n");
+    public void addCountry(Country pop)
+    {
+        try
+        {
+            Statement stmt = con.createStatement();
+            String strUpdate =
+                    "INSERT INTO country (code, population, name, continent, region) " +
+                            "VALUES (" + pop.code + ", '" + pop.population + ", '" + pop.name + ", '"
+                            + pop.continent + ", '" + pop.region + ")";
+
+            stmt.execute(strUpdate);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to add Country");
         }
     }
+
 }
