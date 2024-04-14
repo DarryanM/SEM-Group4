@@ -6,11 +6,14 @@ import java.util.ArrayList;
 public class App {
 
     public static void main(String[] args) {
-        // Create new Application
+        // Create new Application and connect to database
         App a = new App();
 
-        // Connect to database
-        a.connect();
+        if (args.length < 1) {
+            a.connect("localhost:33060", 10000);
+        } else {
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         // Extract Country Population
         ArrayList<Country> population = a.getCountryPopulation();
@@ -114,7 +117,7 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-    public void connect() {
+    public void connect(String location, int delay) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -124,18 +127,27 @@ public class App {
         }
 
         int retries = 10;
+        boolean shouldWait = false;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                // Wait a bit for db to start
-                Thread.sleep(30000);
+                if (shouldWait) {
+                    // Wait a bit for db to start
+                    Thread.sleep(delay);
+                }
+
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "sem4");
+                con = DriverManager.getConnection("jdbc:mysql://" + location
+                                + "/world?allowPublicKeyRetrieval=true&useSSL=false",
+                        "root", "sem4");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
+
+                // Let's wait before attempting to reconnect
+                shouldWait = true;
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
@@ -203,21 +215,21 @@ public class App {
         // Check employees is not null
         if (population == null)
         {
-            System.out.println("No Countries");
+            System.out.println("No Country Population");
             return;
         }
 
         // Print  header
         System.out.println(String.format("%-20s ", "All the countries in the world organised by largest population to smallest."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-10s %10s %-50s %10s %-30s %-30s", "Code", "Population", "Country", "Capital", "Continent", "Region"));
+        System.out.println(String.format("%-10s %10s %-50s %-30s %-30s %-30s", "Code", "Population", "Country", "Capital", "Continent", "Region"));
         // Loop over all Retrieved Populations in the list
         for (Country pop : population) {
 
             if (pop == null)
                 continue;
 
-            String popCount = String.format("%-10s %10s %-50s %-30s %-30s, %-30s", pop.code, pop.population, pop.name, pop.capital, pop.continent, pop.region);
+            String popCount = String.format("%-10s %10s %-50s %-30s %-30s %-30s", pop.code, pop.population, pop.name, pop.capital, pop.continent, pop.region);
             System.out.println(popCount);
         }
 
@@ -1102,6 +1114,50 @@ public class App {
 
             String popCount = String.format("%10s %-30s %-30s %-30s %10s", pop.row_num, pop.name, pop.country, pop.district, pop.population);
             System.out.println(popCount);
+        }
+    }
+
+    public Country getCountry(String code) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "select code, population, continent, name, country, region "
+                            + "From country "
+                            + "WHERE code = " + code;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                Country pop = new Country();
+                pop.code = rset.getString("code");
+                pop.population = rset.getInt("population");
+                pop.continent = rset.getString("continent");
+                pop.name = rset.getString("name");
+                pop.country = rset.getString("country");
+                pop.region = rset.getString("code");
+                return pop;
+            } else
+                return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country details");
+            return null;
+        }
+    }
+
+    public void displayCountry(Country pop) {
+        if (pop != null) {
+            System.out.println(
+                    pop.code + " "
+                            + pop.population + " "
+                            + pop.continent + "\n"
+                            + pop.name + "\n"
+                            + pop.country + "\n"
+                            + pop.region + "\n");
         }
     }
 }
