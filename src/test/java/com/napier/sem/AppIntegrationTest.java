@@ -23,12 +23,19 @@ public class AppIntegrationTest
     @Test
     void testGetCountry()
     {
-        Country pop = app.getCountry( "Aruba");
+        Country pop = app.getCountry( "ABW");
         assertEquals(pop.code, "ABW");
         assertEquals(pop.population, 103000);
         assertEquals(pop.name, "Aruba");
         assertEquals(pop.continent, "North America");
         assertEquals(pop.region, "Caribbean");
+    }
+
+    @Test
+    void testGetCountryPopulationNull()
+    {
+        app.getCountry(null);
+        app.getCountry("EMPTY");
     }
 
     @Test
@@ -55,7 +62,7 @@ public class AppIntegrationTest
     {
         ArrayList<Country> population = app.getCountryPopulation();
 
-        Country pop = app.getCountry("Aruba");
+        Country pop = app.getCountry("ABW");
         assertEquals(pop.code, "ABW");
         assertEquals(pop.population, 103000);
         assertEquals(pop.name, "Aruba");

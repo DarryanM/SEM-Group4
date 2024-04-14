@@ -1128,7 +1128,7 @@ public class App {
             String strSelect =
                     "select code, population, continent, name, region "
                             + "From country "
-                            + "WHERE name = 'Aruba'";
+                            + "WHERE code = '" + code1 + "'";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
