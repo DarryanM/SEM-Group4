@@ -32,7 +32,7 @@ public class AppIntegrationTest
     }
 
     @Test
-    void testGetCountryPopulationNull()
+    void testgetCountryPopulationNull()
     {
         app.getCountry(null);
 
@@ -45,14 +45,14 @@ public class AppIntegrationTest
         pop.code = "TST";
         pop.population = 1;
         pop.name = "Test-Country";
-        pop.continent = "TST-Continent";
+        pop.continent = "Africa";
         pop.region = "Test-Region";
         app.addCountry(pop);
         pop = app.getCountry("TST");
         assertEquals(pop.code, "TST");
         assertEquals(pop.population, 1);
         assertEquals(pop.name, "Test-Country");
-        assertEquals(pop.continent, "TST-Continent");
+        assertEquals(pop.continent, "Africa");
         assertEquals(pop.region, "Test-Region");
 
     }

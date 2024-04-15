@@ -1177,9 +1177,8 @@ public class App {
         {
             Statement stmt = con.createStatement();
             String strUpdate =
-                    "INSERT INTO country (code, population, name, continent, region) " +
-                            "VALUES (" + pop.code + ", '" + pop.population + ", '" + pop.name + ", '"
-                            + pop.continent + ", '" + pop.region + ")";
+                    "INSERT INTO country (population, code, name, continent, region) " +
+                            "VALUES (" + pop.population + ", '" + pop.code + "', '"  + pop.name + "', '" + pop.continent + "', '"  + pop.region + "')";
 
             stmt.execute(strUpdate);
         }
