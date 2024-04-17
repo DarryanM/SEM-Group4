@@ -37,7 +37,7 @@ public class App {
         a.printCityPopulation10(citypop10);
 
         // Extract Top Countries Population
-        ArrayList<Country> topPopulation = a.getTopNCountryPopulation();
+        ArrayList<Country> topPopulation = a.getTopNCountryPopulation(10);
 
         //Display Results
         a.printTopNCountryPopulation(topPopulation);
@@ -359,7 +359,7 @@ public class App {
      *
      * @return A list of all Top Populated countries, or null if there is an error.
      */
-    public ArrayList<Country> getTopNCountryPopulation() {
+    public ArrayList<Country> getTopNCountryPopulation(int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -367,7 +367,7 @@ public class App {
             String strSelect = "SELECT name, continent, code, capital, Region, population "
                     + "FROM country "
                     + "Order By population DESC "
-                    + "Limit 10";
+                    + "Limit " + limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);

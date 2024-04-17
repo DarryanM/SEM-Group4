@@ -70,4 +70,16 @@ public class AppIntegrationTest
         assertEquals(pop.region, "Caribbean");
         app.getCountryPopulation();
     }
+
+
+    @Test
+    void testGetTopNCountryPopulation()
+    {
+        app.getTopNCountryPopulation(10);
+        app.getTopNCountryPopulation(-1);
+    }
+
+
+
+
 }
