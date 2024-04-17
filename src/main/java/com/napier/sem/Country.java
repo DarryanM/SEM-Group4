@@ -20,7 +20,7 @@ public class Country {
     //public City country;
 
 
-    public City district;
+    public String district;
 
 
 

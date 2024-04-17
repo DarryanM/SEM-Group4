@@ -79,7 +79,19 @@ public class AppIntegrationTest
         app.getTopNCountryPopulation(-1);
     }
 
+    @Test
+    void testGetContinentPopulation()
+    {
+        ArrayList<Country> population2 = app.getContinentPopulation();
 
+        Country pop = app.getCountry("ABW");
+        assertEquals(pop.code, "ABW");
+        assertEquals(pop.population, 103000);
+        assertEquals(pop.name, "Aruba");
+        assertEquals(pop.continent, "North America");
+        assertEquals(pop.region, "Caribbean");
+        app.getContinentPopulation();
+    }
 
 
 }
