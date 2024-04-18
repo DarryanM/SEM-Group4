@@ -1814,12 +1814,10 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "WITH continent as (select city.name as name, country.name as country, district, country.continent as continent, city.population as population, RANK ()  "
-                            + "OVER(PARTITION BY continent ORDER BY population DESC) row_num "
-                            + "FROM city inner join country on city.countrycode = country.code) "
-                            + "SELECT row_num, name, country, population "
-                            + "FROM continent WHERE row_num <=" + Limit1 +" "
-                            + "AND continent = '" + cont1 + "'";
+                    "SELECT city.name as name , country.name as country, city.population as population  "
+                            + "FROM city inner join country on city.id = country.capital "
+                            + "WHERE continent = '" + cont1 + "' "
+                            + "ORDER BY population desc Limit " + Limit1;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
