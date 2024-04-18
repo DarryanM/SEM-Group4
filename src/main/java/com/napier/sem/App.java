@@ -61,7 +61,7 @@ public class App {
         a.printCityPop8(cityPop8);
 
         // Extract Top N Countries in a Continent
-        ArrayList<Country> topNCountriesContPop = a.getTopNCountriesInContPopulation();
+        ArrayList<Country> topNCountriesContPop = a.getTopNCountriesInContPopulation(3);
 
         //Display Results
         a.printTopNCountriesInContPopulation(topNCountriesContPop);
@@ -679,7 +679,7 @@ public class App {
      *
      * @return A list of Top N Countries Population in a Continent, or null if there is an error.
      */
-    public ArrayList<Country> getTopNCountriesInContPopulation() {
+    public ArrayList<Country> getTopNCountriesInContPopulation(int Limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -688,7 +688,7 @@ public class App {
 
                     "with country as (select name, code, capital, region, continent, population, row_number() over " +
                             "(partition by continent order by population desc, continent desc) as row_num from country) " +
-                            "select row_num, name, code, capital, region, continent, population from country where row_num <=3";
+                            "select row_num, name, code, capital, region, continent, population from country where row_num <=" + Limit1 + "";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);

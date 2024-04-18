@@ -119,8 +119,13 @@ public class AppIntegrationTest
         assertEquals(pop.district, "Seoul");
         assertEquals(pop.country, "South Korea");
         app.getCityPop();
+    }
 
-
+    @Test
+    void testGetTopNCountriesInContPopulation()
+    {
+        app.getTopNCountriesInContPopulation(3);
+        app.getTopNCountriesInContPopulation(-10);
     }
 
 
