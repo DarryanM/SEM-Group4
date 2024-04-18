@@ -94,4 +94,34 @@ public class AppIntegrationTest
     }
 
 
+    @Test
+    void testGetCity()
+    {
+        City pop = app.getCity( "KOR");
+        assertEquals(pop.population, 9981619);
+        assertEquals(pop.countryCode,"KOR");
+        assertEquals(pop.name, "Seoul");
+        assertEquals(pop.district, "Seoul");
+        assertEquals(pop.country, "South Korea");
+        app.getCityPop();
+
+    }
+
+    @Test
+    void testGetCityPop7()
+    {
+        ArrayList<City> cityPop7 = app.getCityPop();
+
+        City pop = app.getCity("KOR");
+        assertEquals(pop.population, 9981619);
+        assertEquals(pop.countryCode,"KOR");
+        assertEquals(pop.name, "Seoul");
+        assertEquals(pop.district, "Seoul");
+        assertEquals(pop.country, "South Korea");
+        app.getCityPop();
+
+
+    }
+
+
 }

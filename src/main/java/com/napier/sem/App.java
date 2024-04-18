@@ -18,7 +18,7 @@ public class App {
         //Get Country information
         Country pop = a.getCountry("Aruba");
 
-        // Extract Country Population
+         // Extract Country Population
         ArrayList<Country> population = a.getCountryPopulation();
 
         //Display Results
@@ -1230,6 +1230,46 @@ public class App {
             return null;
         }
     }
+
+
+    public City getCity(String code2)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ct.countryCode, c.name as Country, ct.name As  City, ct.district, ct.population " +
+                            "from city as ct Join country as c ON ct.CountryCode = c.code  " +
+                            "WHERE ct.countryCode = '" + code2 + "'";
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new City if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City pop = new City();
+                pop.population = rset.getInt("population");
+                pop.name = rset.getString("city");
+                pop.district = rset.getString("district");
+                pop.countryCode = rset.getString("countryCode");
+                pop.country = rset.getString("Country");
+                return pop;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get City details");
+            return null;
+        }
+    }
+
 
     public void addCountry(Country pop)
     {
