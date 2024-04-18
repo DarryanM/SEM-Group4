@@ -1,5 +1,8 @@
 package com.napier.sem;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class City {
     /**
      * City Population
@@ -22,6 +25,18 @@ public class City {
 
     public String region;
 
+    //Total Country Population
+    public BigDecimal countrypop;
 
+    //Total City Population
+    public BigDecimal citypop;
 
+    //Total Non City Population
+    public BigDecimal noncitypop;
+
+    // total Region Population
+    public BigDecimal regionpop;
+
+    //Total Continent Population
+    public BigDecimal continentpop;
 }

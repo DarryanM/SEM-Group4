@@ -560,6 +560,108 @@ public class AppTest
         app.printTopCityInCountry(nCityTopCtry);
     }
 
+    // Testing of top N populated capital cities in The world where N is provided print Method
+    @Test
+    void printTopNPopCapCitiesWorldNull()
+    {
+        app.printTopNPopCapCitiesWorld(null);
+    }
+
+    @Test
+    void printTopNPopCapCitiesWorldTestContainsNull()
+    {
+        ArrayList<City> population23 = new ArrayList<City>();
+        population23.add(null);
+        app.printTopNPopCapCitiesWorld(population23);
+    }
+
+    @Test
+    void printTopNPopCapCitiesWorldTestEmpty()
+    {
+        ArrayList<City> population23 = new ArrayList<City>();
+        app.printTopNPopCapCitiesWorld(population23);
+    }
+
+    @Test
+    void printTopNPopCapCitiesWorld()
+    {
+        ArrayList<City> population25 = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 1277558000;
+        pop.name = "Peking";
+        pop.country = "China";
+        population25.add(pop);
+        app.printTopNPopCapCitiesWorld(population25);
+    }
+
+    // Testing of top N populated capital cities in a continent where N is provided print Method
+    @Test
+    void printTopNPopCapCitiesContinentNull()
+    {
+        app.printTopNPopCapCitiesContinent(null);
+    }
+
+    @Test
+    void printTopNPopCapCitiesContinentTestContainsNull()
+    {
+        ArrayList<City> population24 = new ArrayList<City>();
+        population24.add(null);
+        app.printTopNPopCapCitiesContinent(population24);
+    }
+
+    @Test
+    void printTopNPopCapCitiesContinentTestEmpty()
+    {
+        ArrayList<City> population24 = new ArrayList<City>();
+        app.printTopNPopCapCitiesContinent(population24);
+    }
+
+    @Test
+    void printTopNPopCapCitiesContinent()
+    {
+        ArrayList<City> population24 = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 8389200;
+        pop.name = "Moscow";
+        pop.country = "Russian Federation";
+        population24.add(pop);
+        app.printTopNPopCapCitiesContinent(population24);
+    }
+
+    // Testing of top N populated capital cities in a Region where N is provided print Method
+    @Test
+    void printTopNPopCapCitiesRegionNull()
+    {
+        app.printTopNPopCapCitiesRegion(null);
+    }
+
+    @Test
+    void printTopNPopCapCitiesRegionTestContainsNull()
+    {
+        ArrayList<City> population25 = new ArrayList<City>();
+        population25.add(null);
+        app.printTopNPopCapCitiesRegion(population25);
+    }
+
+    @Test
+    void printTopNPopCapCitiesRegionTestEmpty()
+    {
+        ArrayList<City> population25 = new ArrayList<City>();
+        app.printTopNPopCapCitiesRegion(population25);
+    }
+
+    @Test
+    void printTopNPopCapCitiesRegion()
+    {
+        ArrayList<City> population25 = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 2256000;
+        pop.name = "La Habana";
+        pop.country = "Cuba";
+        population25.add(pop);
+        app.printTopNPopCapCitiesRegion(population25);
+    }
+
 
     //Test for Capital in the world
 
