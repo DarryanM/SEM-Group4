@@ -39,4 +39,10 @@ public class City {
 
     //Total Continent Population
     public BigDecimal continentpop;
+
+    //Percentage of people in city
+    public double citypoppercent;
+
+    //Percentage of people not living in city
+    public double noncitypoppercent;
 }

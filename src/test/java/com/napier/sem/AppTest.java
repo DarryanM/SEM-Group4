@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -769,7 +770,114 @@ public class AppTest
     }
 
 
+    // Testing of The population of people, people living in cities, and people not living in cities in each continent print Method
+    @Test
+    void printLivingPopContinentNull()
+    {
+        app.printLivingPopContinent(null);
+    }
 
+    @Test
+    void printLivingPopContinentTestContainsNull()
+    {
+        ArrayList<City> population26 = new ArrayList<City>();
+        population26.add(null);
+        app.printLivingPopContinent(population26);
+    }
 
+    @Test
+    void printLivingPopContinentTestEmpty()
+    {
+        ArrayList<City> population26 = new ArrayList<City>();
+        app.printLivingPopContinent(population26);
+    }
+
+    @Test
+    void printLivingPopContinent()
+    {
+        ArrayList<City> population26 = new ArrayList<City>();
+        City pop = new City();
+        pop.continent = "Europe";
+        pop.continentpop = BigDecimal.valueOf(2256000);
+        pop.citypop = BigDecimal.valueOf(100);
+        pop.noncitypop = BigDecimal.valueOf(100);
+        pop.citypoppercent = 34.17;
+        pop.noncitypoppercent= 66.83;
+        population26.add(pop);
+        app.printLivingPopContinent(population26);
+    }
+
+    // Testing of The population of people, people living in cities, and people not living in cities in each Region print Method
+    @Test
+    void printLivingPopRegionNull()
+    {
+        app.printLivingPopRegion(null);
+    }
+
+    @Test
+    void printLivingPopRegionTestContainsNull()
+    {
+        ArrayList<City> population27 = new ArrayList<City>();
+        population27.add(null);
+        app.printLivingPopRegion(population27);
+    }
+
+    @Test
+    void printLivingPopRegionTestEmpty()
+    {
+        ArrayList<City> population27 = new ArrayList<City>();
+        app.printLivingPopRegion(population27);
+    }
+
+    @Test
+    void printLivingPopRegion()
+    {
+        ArrayList<City> population27 = new ArrayList<City>();
+        City pop = new City();
+        pop.region = "Caribbean";
+        pop.regionpop = BigDecimal.valueOf(2256000);
+        pop.citypop = BigDecimal.valueOf(100);
+        pop.noncitypop = BigDecimal.valueOf(100);
+        pop.citypoppercent = 34.17;
+        pop.noncitypoppercent= 66.83;
+        population27.add(pop);
+        app.printLivingPopRegion(population27);
+    }
+    // Testing of The population of people, people living in cities, and people not living in cities in each Country print Method
+    @Test
+    void printLivingPopCountryNull()
+    {
+        app.printLivingPopCountry(null);
+    }
+
+    @Test
+    void printLivingPopCountryTestContainsNull()
+    {
+        ArrayList<City> population28 = new ArrayList<City>();
+        population28.add(null);
+        app.printLivingPopCountry(population28);
+    }
+
+    @Test
+    void printLivingPopCountryTestEmpty()
+    {
+        ArrayList<City> population28 = new ArrayList<City>();
+        app.printLivingPopCountry(population28);
+    }
+
+    @Test
+    void printLivingPopCountry()
+    {
+        ArrayList<City> population28 = new ArrayList<City>();
+        City pop = new City();
+        pop.country = "Aruba";
+        pop.countrypop = BigDecimal.valueOf(2256000);
+        pop.citypop = BigDecimal.valueOf(100);
+        pop.noncitypop = BigDecimal.valueOf(100);
+        pop.citypoppercent = 34.17;
+        pop.noncitypoppercent= 66.83;
+        population28.add(pop);
+        app.printLivingPopCountry(population28);
+    }
 
 }

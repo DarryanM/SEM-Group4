@@ -1960,7 +1960,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT cont1 as continent, continentpop, citypop, (continentpop-citypop) as noncitypop  "
+                    "SELECT cont1 as continent, continentpop, citypop, (continentpop-citypop) as noncitypop, round((citypop/continentpop *100),2) as citypoppercent,  100-round((citypop/continentpop *100),2) as noncitypoppercent "
                             + "FROM (select sum(city.population) as CityPop, country.continent as cont1 from city join country on city.countrycode = country.code group by cont1) AS A "
                             + "Join (select sum(country.population) as continentpop, country.continent as cont2 from country group by country.continent) AS B "
                             + "ON A.cont1 = B.cont2";
@@ -1974,6 +1974,8 @@ public class App {
                 pop.continentpop = rset.getBigDecimal("continentpop");
                 pop.citypop = rset.getBigDecimal("citypop");
                 pop.noncitypop = rset.getBigDecimal("noncitypop");
+                pop.citypoppercent =rset.getDouble("citypoppercent");
+                pop.noncitypoppercent =rset.getDouble("noncitypoppercent");
                 population26.add(pop);
             }
             return population26;
@@ -2000,14 +2002,14 @@ public class App {
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "The population of people, people living in cities, and people not living in cities in each continent."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-40s %30s %30s %30s", "Continents", "Continent Population", "Continent City Population", "Non Continent City Population"));
+        System.out.println(String.format("%-20s %30s %30s %30s %20s %20s", "Continents", "Continent Population", "Continent City Population", "Non Continent City Population", "City Population %", "Non City Population %"));
         // Loop over all Retrieved Populations in the list
         // Check if query returned values.
         for (City pop : population26) {
             if (pop == null)
                 continue;
 
-            String popCount = String.format("%-40s %30s %30s %30s", pop.continent, pop.continentpop, pop.citypop, pop.noncitypop );
+            String popCount = String.format("%-20s %30s %30s %30s %20s %20s", pop.continent, pop.continentpop, pop.citypop, pop.noncitypop, pop.citypoppercent, pop.noncitypoppercent );
             System.out.println(popCount);
         }
     }
@@ -2024,7 +2026,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT reg1 as region, regionpop, citypop, (regionpop-citypop) as noncitypop  "
+                    "SELECT reg1 as region, regionpop, citypop, (regionpop-citypop) as noncitypop, round((citypop/regionpop *100),2) as citypoppercent,  100-round((citypop/regionpop *100),2) as noncitypoppercent   "
                             + "FROM (select sum(city.population) as CityPop, country.region as reg1 from city join country on city.countrycode = country.code group by reg1) AS A "
                             + "Join (select sum(country.population) as regionpop, country.region as reg2 from country group by reg2) AS B "
                             + "ON A.reg1 = B.reg2";
@@ -2038,6 +2040,8 @@ public class App {
                 pop.regionpop = rset.getBigDecimal("regionpop");
                 pop.citypop = rset.getBigDecimal("citypop");
                 pop.noncitypop = rset.getBigDecimal("noncitypop");
+                pop.citypoppercent =rset.getDouble("citypoppercent");
+                pop.noncitypoppercent =rset.getDouble("noncitypoppercent");
                 population27.add(pop);
             }
             return population27;
@@ -2064,14 +2068,14 @@ public class App {
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "The population of people, people living in cities, and people not living in cities in each Region."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-40s %30s %30s %30s", "Region", "Region Population", "Region City Population", "Non Region City Population"));
+        System.out.println(String.format("%-40s %30s %30s %30s %20s %20s", "Region", "Region Population", "Region City Population", "Non Region City Population", "City Population %", "Non City Population %"));
         // Loop over all Retrieved Populations in the list
         // Check if query returned values.
         for (City pop : population27) {
             if (pop == null)
                 continue;
 
-            String popCount = String.format("%-40s %30s %30s %30s", pop.region, pop.regionpop, pop.citypop, pop.noncitypop );
+            String popCount = String.format("%-40s %30s %30s %30s %20s %20s", pop.region, pop.regionpop, pop.citypop, pop.noncitypop, pop.citypoppercent, pop.noncitypoppercent );
             System.out.println(popCount);
         }
     }
@@ -2088,7 +2092,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT con1 as country, countrypop, citypop, (countrypop-citypop) as noncitypop  "
+                    "SELECT con1 as country, countrypop, citypop, (countrypop-citypop) as noncitypop, round((citypop/countrypop *100),2) as citypoppercent,  100-round((citypop/countrypop *100),2) as noncitypoppercent   "
                             + "FROM (select sum(city.population) as CityPop, country.name as con1 from city join country on city.countrycode = country.code group by con1) AS A "
                             + "Join (select sum(country.population) as countrypop, country.name as con2 from country group by con2) AS B "
                             + "ON A.con1 = B.con2";
@@ -2102,6 +2106,8 @@ public class App {
                 pop.countrypop = rset.getBigDecimal("countrypop");
                 pop.citypop = rset.getBigDecimal("citypop");
                 pop.noncitypop = rset.getBigDecimal("noncitypop");
+                pop.citypoppercent =rset.getDouble("citypoppercent");
+                pop.noncitypoppercent =rset.getDouble("noncitypoppercent");
                 population28.add(pop);
             }
             return population28;
@@ -2126,16 +2132,16 @@ public class App {
         }
         // Print header
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-20s ", "The population of people, people living in cities, and people not living in cities in each Region."));
+        System.out.println(String.format("%-20s ", "The population of people, people living in cities, and people not living in cities in each Country."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-40s %30s %30s %30s", "Country", "Country Population", "City Population", "Non City Population"));
+        System.out.println(String.format("%-40s %30s %30s %30s %20s %20s", "Country", "Country Population", "City Population", "Non City Population", "City Population %", "Non City Population %"));
         // Loop over all Retrieved Populations in the list
         // Check if query returned values.
         for (City pop : population28) {
             if (pop == null)
                 continue;
 
-            String popCount = String.format("%-40s %30s %30s %30s", pop.country, pop.countrypop, pop.citypop, pop.noncitypop );
+            String popCount = String.format("%-40s %30s %30s %30s %20s %20s", pop.country, pop.countrypop, pop.citypop, pop.noncitypop, pop.citypoppercent, pop.noncitypoppercent );
             System.out.println(popCount);
         }
     }

@@ -32,7 +32,7 @@ public class AppIntegrationTest
     }
 
     @Test
-    void testgetCountryPopulationNull()
+    void testGetCountryPopulationNull()
     {
         app.getCountry(null);
 
