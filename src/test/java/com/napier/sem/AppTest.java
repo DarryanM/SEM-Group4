@@ -561,4 +561,112 @@ public class AppTest
     }
 
 
+    //Test for Capital in the world
+
+    @Test
+    void printCapitalPopWorldTestNull()
+    {
+        app.printAllCapCitiesWorld(null);
     }
+
+    @Test
+    void printCapitalPopWorldTestContainsNull()
+    {
+        ArrayList<City> population20 = new ArrayList<City>();
+        population20.add(null);
+        app.printAllCapCitiesWorld(population20);
+    }
+
+    @Test
+    void printCapitalPopWorldTestEmpty()
+    {
+        ArrayList<City>population20 = new ArrayList<City>();
+        app.printAllCapCitiesWorld(population20);
+    }
+
+    @Test
+    void printCapitalPopWorld()
+    {
+        ArrayList<City> population20 = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 8008278;
+        pop.name = "United States";
+        pop.country = "Bahamas";
+        population20.add(pop);
+        app.printAllCapCitiesWorld(population20);
+    }
+
+    //Test for Capital in a Continent
+
+    @Test
+    void printCapitalPopContientTestNull()
+    {
+        app.printAllCapCitiesContinent(null);
+    }
+
+    @Test
+    void printCapitalPopContinentTestContainsNull()
+    {
+        ArrayList<City> population21 = new ArrayList<City>();
+        population21.add(null);
+        app.printAllCapCitiesContinent(population21);
+    }
+
+    @Test
+    void printCapitalPopcontinentTestEmpty()
+    {
+        ArrayList<City>population21 = new ArrayList<City>();
+        app.printAllCapCitiesContinent(population21);
+    }
+
+    @Test
+    void printCapitalPopcontinent()
+    {
+        ArrayList<City> population21 = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 8008278;
+        pop.name = "United States";
+        pop.country = "Bahamas";
+        population21.add(pop);
+        app.printAllCapCitiesContinent(population21);
+    }
+
+    //Test for Capital in a Region
+
+    @Test
+    void printCapitalPopRegionTestNull()
+    {
+        app.printAllCapCitiesRegion(null);
+    }
+
+    @Test
+    void printCapitalPopRegionTestContainsNull()
+    {
+        ArrayList<City> population22 = new ArrayList<City>();
+        population22.add(null);
+        app.printAllCapCitiesRegion(population22);
+    }
+
+    @Test
+    void printCapitalPopRegionTestEmpty()
+    {
+        ArrayList<City>population22 = new ArrayList<City>();
+        app.printAllCapCitiesRegion(population22);
+    }
+
+    @Test
+    void printCapitalPopRegion()
+    {
+        ArrayList<City> population22 = new ArrayList<City>();
+        City pop = new City();
+        pop.population = 8008278;
+        pop.name = "United States";
+        pop.country = "Bahamas";
+        population22.add(pop);
+        app.printAllCapCitiesRegion(population22);
+    }
+
+
+
+
+}
