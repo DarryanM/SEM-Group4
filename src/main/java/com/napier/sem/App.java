@@ -1824,7 +1824,6 @@ public class App {
             ArrayList<City> population24 = new ArrayList<City>();
             while (rset.next()) {
                 City pop = new City();
-                pop.row_num = rset.getInt("row_num");
                 pop.name = rset.getString("name");
                 pop.country = rset.getString("country");
                 pop.population = rset.getInt("population");
@@ -1861,7 +1860,7 @@ public class App {
             if (pop == null)
                 continue;
 
-            String popCount = String.format("%10s %-40s %-40s %30s", pop.row_num, pop.name, pop.country, pop.population);
+            String popCount = String.format("%-40s %-40s %30s", pop.name, pop.country, pop.population);
             System.out.println(popCount);
         }
     }
