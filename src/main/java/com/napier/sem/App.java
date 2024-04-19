@@ -779,8 +779,9 @@ public class App {
             String strSelect =
                     "SELECT city.name AS city, country.name AS country, city.district, city.population " +
                             "FROM city INNER JOIN country ON city.countrycode = country.code " +
-                            "ORDER BY district ASC, Where district = '" + dist + '" Order By population DESC LIMIT " + limit1;
-
+                            "Where district = '" + dist + "' " +
+                            "ORDER BY population DESC " +
+                            "LIMIT " + limit1;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
