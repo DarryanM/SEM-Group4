@@ -218,7 +218,7 @@ public class AppIntegrationTest
     @Test
     void testGetDistrictPopulation() {
         app.getDistrictPopulation("xyz", -10);
-        ArrayList<City> districtPopulation11 = app.getDistrictPopulation("Abidjan", 3);
+        ArrayList<City> districtPopulation11 = app.getDistrictPopulation("Istanbul", 3);
 
         City district = app.getCity("TUR");
 
@@ -228,6 +228,6 @@ public class AppIntegrationTest
         assertEquals(district.country, "Turkey");
         assertEquals(district.district, "Istanbul");
 
-        app.getDistrictPopulation("Abidjan", 3);
+        app.getDistrictPopulation("Istanbul", 3);
     }
 }
