@@ -231,7 +231,6 @@ public class AppTest
         pop.name = "Seoul";
         pop.country = "South Korea";
         pop.district = "Seoul";
-        pop.continent = "Asia";
         pop.population = 9981619;
         nCityPop.add(pop);
         app.printTopCityPopulation(nCityPop);

@@ -128,5 +128,19 @@ public class AppIntegrationTest
         app.getTopNCountriesInContPopulation(-10);
     }
 
+    @Test
+    void testgetTopCityPopulation()
+        {
+            app.getTopCityPopulation("xyz",-10);
+            ArrayList<City> nCityPop = app.getTopCityPopulation("Asia",3);
+
+            City pop = app.getCity("KOR");
+            assertEquals(pop.population,9981619);
+            assertEquals(pop.name,"Seoul");
+            assertEquals(pop.country, "South Korea");
+            assertEquals(pop.district,"Seoul");
+            app.getTopCityPopulation("Asia", 3);
+    }
+
 
 }

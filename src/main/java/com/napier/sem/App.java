@@ -43,7 +43,7 @@ public class App {
         a.printTopNCountryPopulation(topPopulation);
 
         // Extract Top City Population in a Continent
-        ArrayList<City> nCityPop = a.getTopCityPopulation();
+        ArrayList<City> nCityPop = a.getTopCityPopulation("Asia",3);
 
         //Display Results
         a.printTopCityPopulation(nCityPop);
@@ -73,7 +73,7 @@ public class App {
         a.printDistrictPopulation(districtPopulation11);
 
         // Extract district population information
-        ArrayList<City> nCityTopReg = a.getTopCityInRegion();
+        ArrayList<City> nCityTopReg = a.getTopCityInRegion("Seoul", 3);
 
         // Display district population results
         a.printTopCityInRegion(nCityTopReg);
@@ -103,7 +103,7 @@ public class App {
         a.printTopNCountriesInRegPopulation(topNCountriesRegPop);
 
         // Extract district population information
-        ArrayList<City> nCityTopCtry = a.getTopCityInCountry();
+        ArrayList<City> nCityTopCtry = a.getTopCityInCountry(3);
 
         // Display district population results
         a.printTopCityInCountry(nCityTopCtry);
@@ -502,7 +502,7 @@ public class App {
         }
     }
 
-    public ArrayList<City> getTopCityPopulation() {
+    public ArrayList<City> getTopCityPopulation(String Cont, int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -512,7 +512,7 @@ public class App {
                     "WITH city1 as (select city.name as name, country.name as country, district, country.continent as continent, city.population as population, RANK () " +
                             "OVER(PARTITION BY continent ORDER BY population DESC) row_num " +
                             "FROM city inner join country on city.countrycode = country.code) " +
-                            "SELECT * FROM city1  WHERE row_num <=3";
+                            "SELECT * FROM city1  WHERE continent = '" + Cont + "' LIMIT " + limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -523,9 +523,9 @@ public class App {
                 pop.population = rset.getInt("population");
                 pop.name = rset.getString("Name");
                 pop.country = rset.getString("Country");
-                pop.continent = rset.getString("continent");
+                //pop.continent = rset.getString("continent");
                 pop.district = rset.getString("district");
-                pop.row_num = rset.getInt("row_num");
+               // pop.row_num = rset.getInt("row_num");
                 nCityPop.add(pop);
             }
             return nCityPop;
@@ -550,13 +550,13 @@ public class App {
         // Print header
         System.out.println(String.format("%-20s ", "The top N populated cities in a continent where N is provided by the user."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%10s %-30s %-30s %-30s %-30s %10s", "row_num", "City", "Country", "District", "Continent", "Population"));
+        System.out.println(String.format("%10s %-30s %-30s  %-30s %10s", "row_num", "City", "Country", "District",  "Population"));
         // Loop over all Retrieved Populations in the list
         for (City pop : nCityPop) {
             if (pop == null)
                 continue;
 
-            String popCount = String.format("%10s %-30s %-30s %-30s %-30s %10s", pop.row_num, pop.name, pop.country, pop.district, pop.continent, pop.population);
+            String popCount = String.format("%10s %-30s %-30s  %-30s %10s", pop.row_num, pop.name, pop.country, pop.district,  pop.population);
             System.out.println(popCount);
         }
     }
@@ -825,7 +825,7 @@ public class App {
     }
 
 
-    public ArrayList<City> getTopCityInRegion() {
+    public ArrayList<City> getTopCityInRegion(String reg, int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -835,7 +835,7 @@ public class App {
                     "WITH city1 as (select city.name as name, country.name as country, district, country.region as region, city.population as population, RANK () " +
                             "OVER(PARTITION BY region ORDER BY population DESC) row_num " +
                             "FROM city inner join country on city.countrycode = country.code) " +
-                            "SELECT * FROM city1  WHERE row_num <=2";
+                            "SELECT * FROM city1  WHERE region = '" +reg+ "' LIMIT " + limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1159,7 +1159,7 @@ public class App {
         }
     }
 
-    public ArrayList<City> getTopCityInCountry() {
+    public ArrayList<City> getTopCityInCountry(int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1169,7 +1169,7 @@ public class App {
                     "WITH city1 as (select city.name as name, country.name as country, district, city.population as population, RANK () " +
                             "OVER(PARTITION BY country.name ORDER BY population DESC) row_num " +
                             "FROM city inner join country on city.countrycode = country.code) " +
-                            "SELECT * FROM city1  WHERE row_num <=1";
+                            "SELECT * FROM city1  WHERE LIMIT " + limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1260,7 +1260,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT ct.countryCode, c.name as Country, ct.name As  City, ct.district, ct.population " +
+                    "SELECT ct.countryCode, c.name as Country, ct.name As  City, ct.district, ct.population, c.continent " +
                             "from city as ct Join country as c ON ct.CountryCode = c.code  " +
                             "WHERE ct.countryCode = '" + code2 + "'";
 
@@ -1277,6 +1277,7 @@ public class App {
                 pop.district = rset.getString("district");
                 pop.countryCode = rset.getString("countryCode");
                 pop.country = rset.getString("Country");
+                pop.continent = rset.getString("Continent");
                 return pop;
             }
             else
