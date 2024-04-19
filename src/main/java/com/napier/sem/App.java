@@ -73,7 +73,7 @@ public class App {
         a.printDistrictPopulation(districtPopulation11);
 
         // Extract district population information
-        ArrayList<City> nCityTopReg = a.getTopCityInRegion("Seoul", 3);
+        ArrayList<City> nCityTopReg = a.getTopCityInRegion("Eastern Asia", 3);
 
         // Display district population results
         a.printTopCityInRegion(nCityTopReg);
@@ -103,7 +103,7 @@ public class App {
         a.printTopNCountriesInRegPopulation(topNCountriesRegPop);
 
         // Extract district population information
-        ArrayList<City> nCityTopCtry = a.getTopCityInCountry(3);
+        ArrayList<City> nCityTopCtry = a.getTopCityInCountry("South Korea",3);
 
         // Display district population results
         a.printTopCityInCountry(nCityTopCtry);
@@ -835,7 +835,7 @@ public class App {
                     "WITH city1 as (select city.name as name, country.name as country, district, country.region as region, city.population as population, RANK () " +
                             "OVER(PARTITION BY region ORDER BY population DESC) row_num " +
                             "FROM city inner join country on city.countrycode = country.code) " +
-                            "SELECT * FROM city1  WHERE region = '" +reg+ "' LIMIT " + limit1;
+                            "SELECT * FROM city1  WHERE region = '" + reg + "' LIMIT " + limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1159,7 +1159,7 @@ public class App {
         }
     }
 
-    public ArrayList<City> getTopCityInCountry(int limit1) {
+    public ArrayList<City> getTopCityInCountry(String Ctry ,int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1169,7 +1169,7 @@ public class App {
                     "WITH city1 as (select city.name as name, country.name as country, district, city.population as population, RANK () " +
                             "OVER(PARTITION BY country.name ORDER BY population DESC) row_num " +
                             "FROM city inner join country on city.countrycode = country.code) " +
-                            "SELECT * FROM city1  WHERE LIMIT " + limit1;
+                            "SELECT * FROM city1  WHERE country = '" + Ctry + "' LIMIT " + limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
