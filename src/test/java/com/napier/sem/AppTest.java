@@ -736,7 +736,7 @@ public class AppTest
     //Test for Capital in the world
 
     @Test
-    void printCapitalPopWorldTestNull()
+    void printallCapitalPopWorldTestNull()
     {
         app.printAllCapCitiesWorld(null);
     }

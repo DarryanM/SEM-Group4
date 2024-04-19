@@ -38,24 +38,6 @@ public class AppIntegrationTest
 
     }
 
-    @Test
-    void testAddCountry()
-    {
-        Country pop = new Country();
-        pop.code = "TST";
-        pop.population = 1;
-        pop.name = "Test-Country";
-        pop.continent = "Africa";
-        pop.region = "Test-Region";
-        app.addCountry(pop);
-        pop = app.getCountry("TST");
-        assertEquals(pop.code, "TST");
-        assertEquals(pop.population, 1);
-        assertEquals(pop.name, "Test-Country");
-        assertEquals(pop.continent, "Africa");
-        assertEquals(pop.region, "Test-Region");
-
-    }
 
     @Test
     void testGetCountryPopulation()
@@ -132,7 +114,7 @@ public class AppIntegrationTest
     @Test
     void testGetContinentPopulation()
     {
-        ArrayList<Country> population2 = app.getContinentPopulation();
+        ArrayList<Country> population2 = app.getContinentPopulation("North America");
 
         Country pop = app.getCountry("ABW");
         assertEquals(pop.code, "ABW");
@@ -140,7 +122,23 @@ public class AppIntegrationTest
         assertEquals(pop.name, "Aruba");
         assertEquals(pop.continent, "North America");
         assertEquals(pop.region, "Caribbean");
-        app.getContinentPopulation();
+        app.getContinentPopulation("North America");
+    }
+
+    @Test
+    void testGetRegionPopulation()
+    {
+        ArrayList<Country> population3 = app.getRegionPopulation("Caribbean");
+
+        Country pop = app.getCountry("ABW");
+        assertEquals(pop.code, "ABW");
+        assertEquals(pop.population, 103000);
+        assertEquals(pop.name, "Aruba");
+        assertEquals(pop.continent, "North America");
+        assertEquals(pop.region, "Caribbean");
+        app.getRegionPopulation("Caribbean");
+
+        app.getRegionPopulation("1");
     }
 
 

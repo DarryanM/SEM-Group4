@@ -49,7 +49,7 @@ public class App {
         a.printTopCityPopulation(nCityPop);
 
         // Extract Continent Population
-        ArrayList<Country> population2 = a.getContinentPopulation();
+        ArrayList<Country> population2 = a.getContinentPopulation("Europe");
 
         //Display Continent Population Results
         a.printContinentPopulation(population2);
@@ -79,7 +79,7 @@ public class App {
         a.printTopCityInRegion(nCityTopReg);
 
         // Extract Region Population
-        ArrayList<Country> population3 = a.getRegionPopulation();
+        ArrayList<Country> population3 = a.getRegionPopulation("Caribbean");
 
         //Display Region Population Results
         a.printRegionPopulation(population3);
@@ -566,7 +566,7 @@ public class App {
      *
      * @return A list of all countries in continenet population sorted in descending order, or null if there is an error.
      */
-    public ArrayList<Country> getContinentPopulation() {
+    public ArrayList<Country> getContinentPopulation(String cont1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -574,7 +574,7 @@ public class App {
             String strSelect =
                     "SELECT code, name, continent, region, capital, population "
                             + "FROM country "
-                            + "Order By continent ASC, population DESC";
+                            + "WHERE continent = '"+ cont1 + "' ORDER BY population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
@@ -779,9 +779,8 @@ public class App {
             String strSelect =
                     "SELECT city.name AS city, country.name AS country, city.district, city.population " +
                             "FROM city INNER JOIN country ON city.countrycode = country.code " +
-                            "Where district = '" + dist + "' " +
-                            "ORDER BY population DESC " +
-                            "LIMIT " + limit1;
+                            "WHERE district = '"+ dist + "' ORDER BY population LIMIT " + limit1;
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
@@ -894,7 +893,7 @@ public class App {
      * @return A list of the population of all countries in a Region  sorted in descending order, or null if there is an error.
      */
 
-    public ArrayList<Country> getRegionPopulation() {
+    public ArrayList<Country> getRegionPopulation(String reg1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -902,7 +901,7 @@ public class App {
             String strSelect =
                     "SELECT code, name, continent, region, capital, population "
                             + "FROM country "
-                            + "Order By region ASC, population DESC";
+                            + "WHERE region = '" + reg1 + "'Order By population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
@@ -1629,7 +1628,6 @@ public class App {
         for (City pop : population20) {
             if (pop == null)
                 continue;
-
             String popCount = String.format("%-40s %-40s %30s", pop.name, pop.country, pop.population);
             System.out.println(popCount);
         }
