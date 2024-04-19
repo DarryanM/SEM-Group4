@@ -97,7 +97,7 @@ public class App {
         a.printCityPop9(cityPop9);
 
         // Extract Top N Countries in a Region
-        ArrayList<Country> topNCountriesRegPop = a.getTopNCountriesInRegPopulation();
+        ArrayList<Country> topNCountriesRegPop = a.getTopNCountriesInRegPopulation("North America", 3);
 
         //Display Results
         a.printTopNCountriesInRegPopulation(topNCountriesRegPop);
@@ -1095,7 +1095,7 @@ public class App {
      *
      * @return A list of Top N Countries Population in a Region with value provide by user, or null if there is an error.
      */
-    public ArrayList<Country> getTopNCountriesInRegPopulation() {
+    public ArrayList<Country> getTopNCountriesInRegPopulation(String reg1, int Limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1104,7 +1104,7 @@ public class App {
 
                     "with country as (select name, code, capital, region, continent, population, row_number() over " +
                             "(partition by region order by population desc, name desc) as row_num from country) " +
-                            "select row_num, name, code, capital, region, continent, population from country where row_num <=3";
+                            "select row_num, name, code, capital, region, continent, population from country where region = '"+ reg1 +"' Limit " + Limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);

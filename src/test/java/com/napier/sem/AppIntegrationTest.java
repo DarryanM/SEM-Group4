@@ -75,8 +75,58 @@ public class AppIntegrationTest
     @Test
     void testGetTopNCountryPopulation()
     {
+        //Testing Query TopNCountryPopulation with variables
+        ArrayList<Country> population = app.getTopNCountryPopulation(3);
+
+        Country pop = app.getCountry("USA");
+        assertEquals(pop.population, 278357000);
+        assertEquals(pop.code,"USA");
+        assertEquals(pop.capital,3813);
+        assertEquals(pop.name, "United States");
+        assertEquals(pop.continent, "North America");
+        assertEquals(pop.region, "North America");
         app.getTopNCountryPopulation(10);
+
+        //Testing if SQL syntax incorrect Catch will run
         app.getTopNCountryPopulation(-1);
+    }
+
+    @Test
+    void testGetTopNCountriesInContPopulation()
+    {
+        //Testing Query TopNCountriesInContPopulation with variables
+        ArrayList<Country> topNCountriesContPop = app.getTopNCountriesInContPopulation("North America", 3);
+
+        Country pop = app.getCountry("USA");
+        assertEquals(pop.population, 278357000);
+        assertEquals(pop.code,"USA");
+        assertEquals(pop.capital,3813);
+        assertEquals(pop.name, "United States");
+        assertEquals(pop.continent, "North America");
+        assertEquals(pop.region, "North America");
+        app.getTopNCountriesInContPopulation("North America", 3);
+
+        //Testing if SQL syntax incorrect Catch will run
+        app.getTopNCountriesInContPopulation("XYZ",-10);
+    }
+
+    @Test
+    void testGetTopNCountriesInRegPopulation()
+    {
+        //Testing Query TopNCountriesInRegPopulation with variables
+        ArrayList<Country> topNCountriesRegPop = app.getTopNCountriesInRegPopulation("Seoul", 3);
+
+        Country pop = app.getCountry("USA");
+        assertEquals(pop.population, 278357000);
+        assertEquals(pop.code,"USA");
+        assertEquals(pop.capital,3813);
+        assertEquals(pop.name, "United States");
+        assertEquals(pop.continent, "North America");
+        assertEquals(pop.region, "North America");
+        app.getTopNCountriesInRegPopulation("North America", 3);
+
+        //Testing if SQL syntax incorrect Catch will run
+        app.getTopNCountriesInRegPopulation("XYZ",-10);
     }
 
     @Test
@@ -121,22 +171,7 @@ public class AppIntegrationTest
         app.getCityPop();
     }
 
-    @Test
-    void testGetTopNCountriesInContPopulation()
-    {
-        app.getTopNCountriesInContPopulation("XYZ",-10);
 
-        ArrayList<Country> topNCountriesContPop = app.getTopNCountriesInContPopulation("North America", 3);
-
-        Country pop = app.getCountry("USA");
-        assertEquals(pop.population, 278357000);
-        assertEquals(pop.code,"USA");
-        assertEquals(pop.capital,3813);
-        assertEquals(pop.name, "United States");
-        assertEquals(pop.continent, "North America");
-        assertEquals(pop.region, "North America");
-        app.getTopNCountriesInContPopulation("North America", 3);
-    }
 
     @Test
     void testgetTopCityPopulation()
