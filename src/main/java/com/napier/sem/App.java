@@ -16,7 +16,7 @@ public class App {
         }
 
         //Get Country information
-        Country pop = a.getCountry("Aruba");
+       Country pop = a.getCountry("Aruba");
 
          // Extract Country Population
         ArrayList<Country> population = a.getCountryPopulation();
@@ -67,7 +67,7 @@ public class App {
         a.printTopNCountriesInContPopulation(topNCountriesContPop);
 
         // Extract district population information
-        ArrayList<City> districtPopulation11 = a.getDistrictPopulation();
+        ArrayList<City> districtPopulation11 = a.getDistrictPopulation("Abidjan", 3);
 
         // Display district population results
         a.printDistrictPopulation(districtPopulation11);
@@ -771,7 +771,7 @@ public class App {
      *
      * @return A list of all cities sorted by population in descending order, or null if there is an error.
      */
-    public ArrayList<City> getDistrictPopulation() {
+    public ArrayList<City> getDistrictPopulation(String dist, int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -779,7 +779,7 @@ public class App {
             String strSelect =
                     "SELECT city.name AS city, country.name AS country, city.district, city.population " +
                             "FROM city INNER JOIN country ON city.countrycode = country.code " +
-                            "ORDER BY district ASC, population DESC ";
+                            "ORDER BY district ASC, Where district = '" + dist + '" Order By population DESC LIMIT " + limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -2147,6 +2147,7 @@ public class App {
             System.out.println(popCount);
         }
     }
+
 
 
 }

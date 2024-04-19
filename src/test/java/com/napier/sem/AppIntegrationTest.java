@@ -214,4 +214,20 @@ public class AppIntegrationTest
         assertEquals(pop.district,"Seoul");
         app.getTopCityInCountry("South Korea", 3);
     }
+
+    @Test
+    void testGetDistrictPopulation() {
+        app.getDistrictPopulation("xyz", -10);
+        ArrayList<City> districtPopulation11 = app.getDistrictPopulation("Abidjan", 3);
+
+        City district = app.getCity("TUR");
+
+
+        assertEquals(district.population, 8787958);
+        assertEquals(district.name, "Istanbul");
+        assertEquals(district.country, "Turkey");
+        assertEquals(district.district, "Istanbul");
+
+        app.getDistrictPopulation("Abidjan", 3);
+    }
 }
