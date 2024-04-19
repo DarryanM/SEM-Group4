@@ -124,8 +124,18 @@ public class AppIntegrationTest
     @Test
     void testGetTopNCountriesInContPopulation()
     {
-        app.getTopNCountriesInContPopulation(3);
-        app.getTopNCountriesInContPopulation(-10);
+        app.getTopNCountriesInContPopulation("XYZ",-10);
+
+        ArrayList<Country> topNCountriesContPop = app.getTopNCountriesInContPopulation("North America", 3);
+
+        Country pop = app.getCountry("USA");
+        assertEquals(pop.population, 278357000);
+        assertEquals(pop.code,"USA");
+        assertEquals(pop.capital,3813);
+        assertEquals(pop.name, "United States");
+        assertEquals(pop.continent, "North America");
+        assertEquals(pop.region, "North America");
+        app.getTopNCountriesInContPopulation("North America", 3);
     }
 
     @Test
@@ -141,6 +151,5 @@ public class AppIntegrationTest
             assertEquals(pop.district,"Seoul");
             app.getTopCityPopulation("Asia", 3);
     }
-
 
 }

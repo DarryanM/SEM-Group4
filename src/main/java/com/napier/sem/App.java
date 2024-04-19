@@ -61,7 +61,7 @@ public class App {
         a.printCityPop8(cityPop8);
 
         // Extract Top N Countries in a Continent
-        ArrayList<Country> topNCountriesContPop = a.getTopNCountriesInContPopulation(3);
+        ArrayList<Country> topNCountriesContPop = a.getTopNCountriesInContPopulation("North America",3);
 
         //Display Results
         a.printTopNCountriesInContPopulation(topNCountriesContPop);
@@ -699,7 +699,7 @@ public class App {
      *
      * @return A list of Top N Countries Population in a Continent, or null if there is an error.
      */
-    public ArrayList<Country> getTopNCountriesInContPopulation(int Limit1) {
+    public ArrayList<Country> getTopNCountriesInContPopulation(String cont1, int Limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -708,7 +708,7 @@ public class App {
 
                     "with country as (select name, code, capital, region, continent, population, row_number() over " +
                             "(partition by continent order by population desc, continent desc) as row_num from country) " +
-                            "select row_num, name, code, capital, region, continent, population from country where row_num <=" + Limit1 + "";
+                            "select row_num, name, code, capital, region, continent, population from country where continent = '"+ cont1 +"' Limit " + Limit1;
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1226,9 +1226,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "select code, population, continent, name, region "
+                    "select code, population, continent, name, region, capital "
                             + "From country "
-                            + "WHERE code = '" + code1 + "'";
+                            + "WHERE country.code = '" + code1 + "'";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -1241,6 +1241,7 @@ public class App {
                 pop.continent = rset.getString("continent");
                 pop.name = rset.getString("name");
                 pop.region = rset.getString("region");
+                pop.capital = rset.getInt("capital");
                 return pop;
             } else
                 return null;
