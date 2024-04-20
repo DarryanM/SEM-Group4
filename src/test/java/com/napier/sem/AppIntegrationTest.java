@@ -31,6 +31,7 @@ public class AppIntegrationTest
         assertEquals(pop.region, "Caribbean");
     }
 
+    //Test Country Population
     @Test
     void testGetCountryPopulationNull()
     {
@@ -137,8 +138,6 @@ public class AppIntegrationTest
         assertEquals(pop.continent, "North America");
         assertEquals(pop.region, "Caribbean");
         app.getRegionPopulation("Caribbean");
-
-        app.getRegionPopulation("1");
     }
 
 
@@ -154,6 +153,7 @@ public class AppIntegrationTest
         app.getCityPop();
 
     }
+
 
     @Test
     void testGetCityPop7()
@@ -227,5 +227,96 @@ public class AppIntegrationTest
         assertEquals(district.district, "Istanbul");
 
         app.getDistrictPopulation("Istanbul", 3);
+    }
+
+
+    @Test
+    void testGetCapitalCity()
+    {
+        City pop = app.getCapitalCity( "CHN");
+        assertEquals(pop.population, 7472000);
+        assertEquals(pop.name, "Peking");
+        assertEquals(pop.continent, "Asia");
+        assertEquals(pop.region, "Eastern Asia");
+        assertEquals(pop.district, "Peking");
+        assertEquals(pop.country, "China");
+    }
+
+    @Test
+    void testGetAllCapCitiesWorld()
+    {
+        app.getAllCapCitiesWorld();
+        ArrayList<City> population20 = app.getAllCapCitiesWorld();
+
+        City pop = app.getCapitalCity("CHN");
+        assertEquals(pop.population,7472000);
+        assertEquals(pop.name,"Peking");
+        assertEquals(pop.district,"Peking");
+        app.getAllCapCitiesWorld();
+    }
+
+    @Test
+    void testGetAllCapContinent()
+    {
+        app.getAllCapCitiesContinent("Asia");
+        ArrayList<City> population21 = app.getAllCapCitiesContinent("Asia");
+
+        City pop = app.getCapitalCity("CHN");
+        assertEquals(pop.population,7472000);
+        assertEquals(pop.name,"Peking");
+        assertEquals(pop.district,"Peking");
+        app.getAllCapCitiesContinent("Asia");
+    }
+
+    @Test
+    void testGetAllCapRegion()
+    {
+        app.getAllCapCitiesRegion("Eastern Asia");
+        ArrayList<City> population22 = app.getAllCapCitiesRegion("Eastern Asia");
+
+        City pop = app.getCapitalCity("CHN");
+        assertEquals(pop.population,7472000);
+        assertEquals(pop.name,"Peking");
+        assertEquals(pop.district,"Peking");
+        app.getAllCapCitiesRegion("Eastern Asia");
+    }
+
+    @Test
+    void testGetTopNPopCapCitiesWorld()
+    {
+        app.getTopNPopCapCitiesWorld(-5);
+        ArrayList<City> population23 = app.getTopNPopCapCitiesWorld(5);
+
+        City pop = app.getCapitalCity("CHN");
+        assertEquals(pop.population,7472000);
+        assertEquals(pop.name,"Peking");
+        assertEquals(pop.country,"China");
+        app.getTopNPopCapCitiesWorld(5);
+    }
+
+    @Test
+    void testGetTopNPopCapContinent()
+    {
+        app.getTopNPopCapCitiesContinent("Asia", -5);
+        ArrayList<City> population23 = app.getTopNPopCapCitiesContinent("Asia", 5);
+
+        City pop = app.getCapitalCity("CHN");
+        assertEquals(pop.population,7472000);
+        assertEquals(pop.name,"Peking");
+        assertEquals(pop.country,"China");
+        app.getTopNPopCapCitiesContinent("Asia",5);
+    }
+
+    @Test
+    void testGetTopNPopCapRegion()
+    {
+        app.getTopNPopCapCitiesRegion("Eastern Asia", -5);
+        ArrayList<City> population23 = app.getTopNPopCapCitiesRegion("Eastern Asia", 5);
+
+        City pop = app.getCapitalCity("CHN");
+        assertEquals(pop.population,7472000);
+        assertEquals(pop.name,"Peking");
+        assertEquals(pop.country,"China");
+        app.getTopNPopCapCitiesRegion("Eastern Asia",5);
     }
 }

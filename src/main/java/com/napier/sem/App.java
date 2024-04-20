@@ -16,7 +16,10 @@ public class App {
         }
 
         //Get Country information
-       Country pop = a.getCountry("Aruba");
+        Country pop = a.getCountry("Aruba");
+
+        //Get Country information
+        a.getCapitalCity("CHN");
 
          // Extract Country Population
         ArrayList<Country> population = a.getCountryPopulation();
@@ -1292,6 +1295,39 @@ public class App {
         }
     }
 
+//For Integration Testing
+    public City getCapitalCity(String code1) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "select city.name as name, country.name as country, district, city.population as population, country.continent, country.region "
+                            + "FROM city inner join country on city.id = country.capital "
+                            + "WHERE city.countrycode = '" + code1 + "'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                City pop = new City();
+                pop.population = rset.getInt("population");
+                pop.continent = rset.getString("continent");
+                pop.name = rset.getString("name");
+                pop.region = rset.getString("region");
+                pop.district = rset.getString("district");
+                pop.country = rset.getString("country");
+                return pop;
+            } else
+                return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Capital Country details");
+            return null;
+        }
+    }
+
 
     public void addCountry(Country pop)
     {
@@ -1584,7 +1620,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "select city.name as name, country.name as country, district, country.population as population "
+                    "select city.name as name, country.name as country, district, city.population as population "
                             + "FROM city inner join country on city.id = country.capital "
                             + "ORDER BY population DESC";
             // Execute SQL statement
@@ -1772,7 +1808,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "select city.name as name, country.name as country, country.population as population  "
+                    "SELECT city.name as name, country.name as country, city.population as population  "
                             + "FROM city inner join country on city.id = country.capital "
                             + "ORDER BY population DESC Limit " + Limit1;
             // Execute SQL statement
