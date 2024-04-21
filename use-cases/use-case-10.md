@@ -4,12 +4,12 @@
 
 ### Goal in Context
 
-As the *Organisation* we want to *produce a report on all the cities in a country organised by largest to smallest population*
+As the *Data Analyst* I want to *produce a report on all the cities in a country organised by largest to smallest population*
 to allow easy access to this population information
 
 ### Scope
 
-Company.
+Data Analyst
 
 ### Level
 
@@ -29,7 +29,7 @@ No report is produced.
 
 ### Primary Actor
 
-The Organisation.
+Data Analyst
 
 ### Trigger
 
