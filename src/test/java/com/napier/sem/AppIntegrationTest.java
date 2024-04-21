@@ -169,7 +169,33 @@ public class AppIntegrationTest
         app.getCityPop();
     }
 
+    @Test
+    void testgetCitypop10()
+    {
+        ArrayList<City> cityPop10 = app.getCityPopulation10();
 
+        City pop = app.getCity("KOR");
+        assertEquals(pop.population, 9981619);
+        assertEquals(pop.countryCode,"KOR");
+        assertEquals(pop.name, "Seoul");
+        assertEquals(pop.district, "Seoul");
+        assertEquals(pop.country, "South Korea");
+        app.getCityPopulation10();
+    }
+
+    @Test
+    void testGetcityPop9()
+    {
+        ArrayList<City> cityPop9 = app.getCityPopregi();
+
+        City pop = app.getCity("KOR");
+        assertEquals(pop.population, 9981619);
+        assertEquals(pop.countryCode,"KOR");
+        assertEquals(pop.name, "Seoul");
+        assertEquals(pop.district, "Seoul");
+        assertEquals(pop.country, "South Korea");
+        app.getCityPopregi();
+    }
 
     @Test
     void testgetTopCityPopulation()
@@ -319,4 +345,6 @@ public class AppIntegrationTest
         assertEquals(pop.country,"China");
         app.getTopNPopCapCitiesRegion("Eastern Asia",5);
     }
+
+
 }

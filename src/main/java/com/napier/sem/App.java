@@ -438,9 +438,9 @@ public class App {
     }
 
     /**
-     * Gets the population of Top N of all countries in the world.
+     * Gets top N populated countries in the world where N is provided by the user.
      *
-     * @return A list of all Top Populated countries, or null if there is an error.
+     * @return A list of all top N populated countries in the world where N is provided by the user, or null if there is an error.
      */
     public ArrayList<Country> getTopNCountryPopulation(int limit1) {
         try {
@@ -475,7 +475,7 @@ public class App {
     }
 
     /**
-     * Prints a list of Top N Populations.
+     * Prints a list of Top N Populations countries in the world.
      *
      * @param topPopulation The list of Population to print.
      */
