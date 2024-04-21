@@ -172,19 +172,19 @@ public class App {
         a.printTopNPopCapCitiesRegion(population25);
 
         // Extract The population of people, people living in cities, and people not living in cities in each continent
-        ArrayList<City> population26 = a.getLivingPopContinent();
+        ArrayList<City> population26 = a.getLivingPopContinent("North America");
 
         //Display Results of The population of people, people living in cities, and people not living in cities in each continent
         a.printLivingPopContinent(population26);
 
         // Extract The population of people, people living in cities, and people not living in cities in each Region
-        ArrayList<City> population27 = a.getLivingPopRegion();
+        ArrayList<City> population27 = a.getLivingPopRegion("Caribbean");
 
         //Display Results of The population of people, people living in cities, and people not living in cities in each Region
         a.printLivingPopRegion(population27);
 
         // Extract The population of people, people living in cities, and people not living in cities in each Country
-        ArrayList<City> population28 = a.getLivingPopCountry();
+        ArrayList<City> population28 = a.getLivingPopCountry("Aruba");
 
         //Display Results of The population of people, people living in cities, and people not living in cities in each Region
         a.printLivingPopCountry(population28);
@@ -1328,7 +1328,109 @@ public class App {
         }
     }
 
+    //integration test - get population of people within a continent who living in and out of cities
+    public City getLivingPop1(String contin1) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT cont1 as continent, continentpop, citypop, (continentpop-citypop) as noncitypop, round((citypop/continentpop *100),2) as citypoppercent,  100-round((citypop/continentpop *100),2) as noncitypoppercent "
+                            + "FROM (select sum(city.population) as CityPop, country.continent as cont1 from city join country on city.countrycode = country.code group by cont1) AS A "
+                            + "Join (select sum(country.population) as continentpop, country.continent as cont2 from country group by country.continent) AS B "
+                            + "ON A.cont1 = B.cont2 "
+                            + "WHERE cont1 = '" + contin1 + "'";
 
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                City pop = new City();
+                pop.continent = rset.getString("continent");
+                pop.continentpop = rset.getLong("continentpop");
+                pop.citypop = rset.getLong("citypop");
+                pop.noncitypop = rset.getLong("noncitypop");
+                pop.citypoppercent = rset.getDouble("citypoppercent");
+                pop.noncitypoppercent = rset.getDouble("noncitypoppercent");
+                return pop;
+            } else
+                return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country City and Non-City Population details");
+            return null;
+        }
+    }
+//integration test - get population of people within a reagion who living in and out of cities
+    public City getLivingPop2(String region1) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT reg1 as region, regionpop, citypop, (regionpop-citypop) as noncitypop, round((citypop/regionpop *100),2) as citypoppercent,  100-round((citypop/regionpop *100),2) as noncitypoppercent   "
+                            + "FROM (select sum(city.population) as CityPop, country.region as reg1 from city join country on city.countrycode = country.code group by reg1) AS A "
+                            + "Join (select sum(country.population) as regionpop, country.region as reg2 from country group by reg2) AS B "
+                            + "ON A.reg1 = B.reg2 "
+                            + "Where reg1 = '" + region1 + "'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                City pop = new City();
+                pop.region = rset.getString("region");
+                pop.regionpop = rset.getLong("regionpop");
+                pop.citypop = rset.getLong("citypop");
+                pop.noncitypop = rset.getLong("noncitypop");
+                pop.citypoppercent = rset.getDouble("citypoppercent");
+                pop.noncitypoppercent = rset.getDouble("noncitypoppercent");
+                return pop;
+            } else
+                return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country City and Non-City Population details");
+            return null;
+        }
+    }
+
+    //integration test - get population of people within a country who living in and out of cities
+    public City getLivingPop3(String country1) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT con1 as country, countrypop, citypop, (countrypop-citypop) as noncitypop, round((citypop/countrypop *100),2) as citypoppercent,  100-round((citypop/countrypop *100),2) as noncitypoppercent "
+                            + "FROM (select sum(city.population) as CityPop, country.name as con1 from city join country on city.countrycode = country.code group by con1) AS A "
+                            + "Join (select sum(country.population) as countrypop, country.name as con2 from country group by con2) AS B "
+                            + "ON A.con1 = B.con2 "
+                            + " WHERE con1 = '" + country1 +"'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                City pop = new City();
+                pop.country = rset.getString("country");
+                pop.countrypop = rset.getLong("countrypop");
+                pop.citypop = rset.getLong("citypop");
+                pop.noncitypop = rset.getLong("noncitypop");
+                pop.citypoppercent = rset.getDouble("citypoppercent");
+                pop.noncitypoppercent = rset.getDouble("noncitypoppercent");
+                return pop;
+            } else
+                return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country City and Non-City Population details");
+            return null;
+        }
+    }
     public void addCountry(Country pop)
     {
         try
@@ -1871,7 +1973,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.name as name , country.name as country, city.population as population  "
+                    "SELECT city.name as name, country.name as country, city.population as population  "
                             + "FROM city inner join country on city.id = country.capital "
                             + "WHERE continent = '" + cont1 + "' "
                             + "ORDER BY population desc Limit " + Limit1;
@@ -1991,7 +2093,7 @@ public class App {
      * @return A list of The population of people, people living in cities, and people not living in cities in each continent or null if there is an error.
      */
 
-    public ArrayList<City> getLivingPopContinent() {
+    public ArrayList<City> getLivingPopContinent(String contin1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -2000,7 +2102,8 @@ public class App {
                     "SELECT cont1 as continent, continentpop, citypop, (continentpop-citypop) as noncitypop, round((citypop/continentpop *100),2) as citypoppercent,  100-round((citypop/continentpop *100),2) as noncitypoppercent "
                             + "FROM (select sum(city.population) as CityPop, country.continent as cont1 from city join country on city.countrycode = country.code group by cont1) AS A "
                             + "Join (select sum(country.population) as continentpop, country.continent as cont2 from country group by country.continent) AS B "
-                            + "ON A.cont1 = B.cont2";
+                            + "ON A.cont1 = B.cont2 "
+                            + "WHERE cont1 = '" + contin1 +"' ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
@@ -2008,9 +2111,9 @@ public class App {
             while (rset.next()) {
                 City pop = new City();
                 pop.continent = rset.getString("continent");
-                pop.continentpop = rset.getBigDecimal("continentpop");
-                pop.citypop = rset.getBigDecimal("citypop");
-                pop.noncitypop = rset.getBigDecimal("noncitypop");
+                pop.continentpop = rset.getLong("continentpop");
+                pop.citypop = rset.getLong("citypop");
+                pop.noncitypop = rset.getLong("noncitypop");
                 pop.citypoppercent =rset.getDouble("citypoppercent");
                 pop.noncitypoppercent =rset.getDouble("noncitypoppercent");
                 population26.add(pop);
@@ -2057,7 +2160,7 @@ public class App {
      * @return A list of The population of people, people living in cities, and people not living in cities in each Region or null if there is an error.
      */
 
-    public ArrayList<City> getLivingPopRegion() {
+    public ArrayList<City> getLivingPopRegion(String region1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -2066,7 +2169,8 @@ public class App {
                     "SELECT reg1 as region, regionpop, citypop, (regionpop-citypop) as noncitypop, round((citypop/regionpop *100),2) as citypoppercent,  100-round((citypop/regionpop *100),2) as noncitypoppercent   "
                             + "FROM (select sum(city.population) as CityPop, country.region as reg1 from city join country on city.countrycode = country.code group by reg1) AS A "
                             + "Join (select sum(country.population) as regionpop, country.region as reg2 from country group by reg2) AS B "
-                            + "ON A.reg1 = B.reg2";
+                            + "ON A.reg1 = B.reg2 "
+                            + "Where reg1 = '" + region1 + "'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
@@ -2074,9 +2178,9 @@ public class App {
             while (rset.next()) {
                 City pop = new City();
                 pop.region = rset.getString("region");
-                pop.regionpop = rset.getBigDecimal("regionpop");
-                pop.citypop = rset.getBigDecimal("citypop");
-                pop.noncitypop = rset.getBigDecimal("noncitypop");
+                pop.regionpop = rset.getLong("regionpop");
+                pop.citypop = rset.getLong("citypop");
+                pop.noncitypop = rset.getLong("noncitypop");
                 pop.citypoppercent =rset.getDouble("citypoppercent");
                 pop.noncitypoppercent =rset.getDouble("noncitypoppercent");
                 population27.add(pop);
@@ -2123,16 +2227,17 @@ public class App {
      * @return A list of The population of people, people living in cities, and people not living in cities in each Region or null if there is an error.
      */
 
-    public ArrayList<City> getLivingPopCountry() {
+    public ArrayList<City> getLivingPopCountry(String country1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT con1 as country, countrypop, citypop, (countrypop-citypop) as noncitypop, round((citypop/countrypop *100),2) as citypoppercent,  100-round((citypop/countrypop *100),2) as noncitypoppercent   "
+                    "SELECT con1 as country, countrypop, citypop, (countrypop-citypop) as noncitypop, round((citypop/countrypop *100),2) as citypoppercent,  100-round((citypop/countrypop *100),2) as noncitypoppercent "
                             + "FROM (select sum(city.population) as CityPop, country.name as con1 from city join country on city.countrycode = country.code group by con1) AS A "
                             + "Join (select sum(country.population) as countrypop, country.name as con2 from country group by con2) AS B "
-                            + "ON A.con1 = B.con2";
+                            + "ON A.con1 = B.con2 "
+                            + " WHERE con1 = '" + country1 +"'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
@@ -2140,9 +2245,9 @@ public class App {
             while (rset.next()) {
                 City pop = new City();
                 pop.country = rset.getString("country");
-                pop.countrypop = rset.getBigDecimal("countrypop");
-                pop.citypop = rset.getBigDecimal("citypop");
-                pop.noncitypop = rset.getBigDecimal("noncitypop");
+                pop.countrypop = rset.getLong("countrypop");
+                pop.citypop = rset.getLong("citypop");
+                pop.noncitypop = rset.getLong("noncitypop");
                 pop.citypoppercent =rset.getDouble("citypoppercent");
                 pop.noncitypoppercent =rset.getDouble("noncitypoppercent");
                 population28.add(pop);

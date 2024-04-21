@@ -867,9 +867,9 @@ public class AppTest
         ArrayList<City> population26 = new ArrayList<City>();
         City pop = new City();
         pop.continent = "Europe";
-        pop.continentpop = BigDecimal.valueOf(2256000);
-        pop.citypop = BigDecimal.valueOf(100);
-        pop.noncitypop = BigDecimal.valueOf(100);
+        pop.continentpop = 2256000;
+        pop.citypop = 100;
+        pop.noncitypop = 100;
         pop.citypoppercent = 34.17;
         pop.noncitypoppercent= 66.83;
         population26.add(pop);
@@ -904,9 +904,9 @@ public class AppTest
         ArrayList<City> population27 = new ArrayList<City>();
         City pop = new City();
         pop.region = "Caribbean";
-        pop.regionpop = BigDecimal.valueOf(2256000);
-        pop.citypop = BigDecimal.valueOf(100);
-        pop.noncitypop = BigDecimal.valueOf(100);
+        pop.regionpop = 2256000;
+        pop.citypop = 100;
+        pop.noncitypop = 100;
         pop.citypoppercent = 34.17;
         pop.noncitypoppercent= 66.83;
         population27.add(pop);
@@ -940,9 +940,9 @@ public class AppTest
         ArrayList<City> population28 = new ArrayList<City>();
         City pop = new City();
         pop.country = "Aruba";
-        pop.countrypop = BigDecimal.valueOf(2256000);
-        pop.citypop = BigDecimal.valueOf(100);
-        pop.noncitypop = BigDecimal.valueOf(100);
+        pop.countrypop = 2256000;
+        pop.citypop = 100;
+        pop.noncitypop = 100;
         pop.citypoppercent = 34.17;
         pop.noncitypoppercent= 66.83;
         population28.add(pop);

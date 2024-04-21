@@ -26,19 +26,19 @@ public class City {
     public String region;
 
     //Total Country Population
-    public BigDecimal countrypop;
+    public long countrypop;
 
     //Total City Population
-    public BigDecimal citypop;
+    public long citypop;
 
     //Total Non City Population
-    public BigDecimal noncitypop;
+    public long noncitypop;
 
     // total Region Population
-    public BigDecimal regionpop;
+    public long regionpop;
 
     //Total Continent Population
-    public BigDecimal continentpop;
+    public long continentpop;
 
     //Percentage of people in city
     public double citypoppercent;

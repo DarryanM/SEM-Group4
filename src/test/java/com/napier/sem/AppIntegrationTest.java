@@ -199,16 +199,16 @@ public class AppIntegrationTest
 
     @Test
     void testgetTopCityPopulation()
-        {
-            app.getTopCityPopulation("xyz",-10);
-            ArrayList<City> nCityPop = app.getTopCityPopulation("Asia",3);
+    {
+        app.getTopCityPopulation("xyz",-10);
+        ArrayList<City> nCityPop = app.getTopCityPopulation("Asia",3);
 
-            City pop = app.getCity("KOR");
-            assertEquals(pop.population,9981619);
-            assertEquals(pop.name,"Seoul");
-            assertEquals(pop.country, "South Korea");
-            assertEquals(pop.district,"Seoul");
-            app.getTopCityPopulation("Asia", 3);
+        City pop = app.getCity("KOR");
+        assertEquals(pop.population,9981619);
+        assertEquals(pop.name,"Seoul");
+        assertEquals(pop.country, "South Korea");
+        assertEquals(pop.district,"Seoul");
+        app.getTopCityPopulation("Asia", 3);
     }
 
     @Test
@@ -346,5 +346,53 @@ public class AppIntegrationTest
         app.getTopNPopCapCitiesRegion("Eastern Asia",5);
     }
 
+
+    @Test
+    void testGetLivingPopContinent()
+    {
+        //app.getLivingPopContinent("North America");
+        ArrayList<City> population26 = app.getLivingPopContinent("North America");
+
+        City pop = app.getLivingPop1( "North America");
+        assertEquals(pop.continent, "North America");
+        assertEquals(pop.continentpop, 482993000);
+        assertEquals(pop.citypop, 168250381);
+        assertEquals(pop.noncitypop, 314742619);
+        assertEquals(pop.citypoppercent, 34.83);
+        assertEquals(pop.noncitypoppercent, 65.17);
+        app.getLivingPopContinent("North America");
+    }
+
+    @Test
+    void testGetLivingPopRegion()
+    {
+        app.getLivingPopContinent("North America");
+        ArrayList<City> population27 = app.getLivingPopRegion("Caribbean");
+
+        City pop = app.getLivingPop2( "Caribbean");
+        assertEquals(pop.region, "Caribbean");
+        assertEquals(pop.regionpop, 38140000);
+        assertEquals(pop.citypop, 11067550);
+        assertEquals(pop.noncitypop, 27072450);
+        assertEquals(pop.citypoppercent, 29.02);
+        assertEquals(pop.noncitypoppercent, 70.98);
+        app.getLivingPopRegion("Caribbean");
+    }
+
+    @Test
+    void testGetLivingPopCountry()
+    {
+        //app.getLivingPopContinent("North America");
+        ArrayList<City> population28 = app.getLivingPopCountry("Aruba");
+
+        City pop = app.getLivingPop3( "Aruba");
+        assertEquals(pop.country, "Aruba");
+        assertEquals(pop.countrypop, 103000);
+        assertEquals(pop.citypop, 29034);
+        assertEquals(pop.noncitypop, 73966);
+        assertEquals(pop.citypoppercent, 28.19);
+        assertEquals(pop.noncitypoppercent, 71.81);
+        app.getLivingPopRegion("Aruba");
+    }
 
 }
