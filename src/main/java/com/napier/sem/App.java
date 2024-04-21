@@ -65,7 +65,7 @@ public class App {
         a.printCityPop(cityPop7);
 
         // Extract City Population in a continent
-        ArrayList<City> cityPop8 = a.getCityPopconti();
+        ArrayList<City> cityPop8 = a.getCityPopconti("Asia", 2);
 
         //Display Results for city population in a continent
         a.printCityPop8(cityPop8);
@@ -383,7 +383,7 @@ public class App {
         System.out.println(String.format("%-20s ", " "));
         System.out.println(String.format("%-20s ", "Population of All the countries in a continent organised by largest population to smallest."));
         System.out.println(String.format("%-20s ", " "));
-        System.out.println(String.format("%-10s %10s %-50s %-30s %-30s %-30s", "Code", "Population", "Country", "Capital", "Continent", "Region"));
+        System.out.println(String.format("%-10s %10s %-50s %-10s %-30s %-30s", "Code", "Population", "Country", "Capital", "Continent", "Region"));
         // Loop over all Retrieved Populations in the list
         // Check if query returned values.
         for (Country pop : population2) {
@@ -751,15 +751,16 @@ public class App {
      * @return A list of all Population sorted in descending order, or null if there is an error.
      */
 
-    public ArrayList<City> getCityPopconti() {
+    public ArrayList<City> getCityPopconti(String conti1, int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
                     "SELECT ct.countryCode, c.name As Country, ct.name As City, ct.population, c.continent " +
-                            " from city as ct Join country as c ON ct.CountryCode = c.code " +
-                            "Order by c.continent, ct.population desc ";
+                            " FROM city as ct Join country as c ON ct.CountryCode = c.code " +
+                            " WHERE c.continent = '" + conti1 +"' "+
+                            "Order by ct.population desc LIMIT "+ limit1;
 
 
             // Execute SQL statement
