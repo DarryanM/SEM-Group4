@@ -71,7 +71,7 @@ public class App {
         a.printCityPop8(cityPop8);
 
         // Extract City Population in a region
-        ArrayList<City> cityPop9 = a.getCityPopregi();
+        ArrayList<City> cityPop9 = a.getCityPopregi("Eastern Asia", 4);
 
         //Display Results for city population in a region
         a.printCityPop9(cityPop9);
@@ -820,15 +820,17 @@ public class App {
      * @return A list of all Population sorted in descending order, or null if there is an error.
      */
 
-    public ArrayList<City> getCityPopregi() {
+    public ArrayList<City> getCityPopregi(String reg,int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT ct.countryCode, c.name As Country, ct.name As  City, ct.population, c.region  " +
-                            " from city as ct  Join country as c ON ct.CountryCode = c.code  " +
-                            "order by c.region, ct.population desc  ";
+                    "SELECT ct.countryCode, c.name As Country, ct.name As  City, ct.population, c.region " +
+                            "from city as ct  Join country as c ON ct.CountryCode = c.code " +
+                            "WHERE region = '" + reg + "'" +
+                            "order by c.region, ct.population desc LIMIT " + limit1;
+
 
 
             // Execute SQL statement
