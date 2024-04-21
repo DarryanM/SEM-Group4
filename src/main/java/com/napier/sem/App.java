@@ -138,7 +138,7 @@ public class App {
 
 
         // Extract top N populated cities in a District where N was provided
-        ArrayList<City> population19 = a.getTopNPopCitiesDistrict(3);
+        ArrayList<City> population19 = a.getTopNPopCitiesDistrict("Seol",3);
 
         //Display Results of top N populated cities in a District where N was provided
         a.printTopNPopCitiesDistrict(population19);
@@ -1468,16 +1468,17 @@ public class App {
      * @return A list of the top N populated cities in a District where N was provided  sorted in descending order, or null if there is an error.
      */
 
-    public ArrayList<City> getTopNPopCitiesDistrict(int Limit1) {
+    public ArrayList<City> getTopNPopCitiesDistrict(String dist1, int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "WITH district as (select city.name as name, country.name as country, district, city.population as population, RANK ()  "
+                    "WITH district1 as (select city.name as name, country.name as country, district, city.population as population, RANK ()  "
                             + "OVER(PARTITION BY district ORDER BY population DESC) row_num "
                             + "FROM city inner join country on city.countrycode = country.code) "
-                            + "SELECT row_num, name, country, district, population FROM district  WHERE row_num <=" + Limit1;
+                            + "SELECT row_num, name, country, district, population "
+                            + "FROM district1  WHERE district = '"+ dist1 + "' LIMIT " + limit1;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract Population information
@@ -2139,7 +2140,7 @@ public class App {
         }
     }
 
-
+//Inetegeration Test get City population information
     public City getCity(String code2)
     {
         try
@@ -2151,6 +2152,47 @@ public class App {
                     "SELECT ct.countryCode, c.name as Country, ct.name As  City, ct.district, ct.population, c.continent " +
                             "from city as ct Join country as c ON ct.CountryCode = c.code  " +
                             "WHERE ct.countryCode = '" + code2 + "'";
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new City if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City pop = new City();
+                pop.population = rset.getInt("population");
+                pop.name = rset.getString("city");
+                pop.district = rset.getString("district");
+                pop.countryCode = rset.getString("countryCode");
+                pop.country = rset.getString("Country");
+                pop.continent = rset.getString("Continent");
+                return pop;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get City details");
+            return null;
+        }
+    }
+
+
+    //Inetegeration Test get City population information
+    public City getDistrict(String code2)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ct.countryCode, c.name as Country, ct.name As  City, ct.district, ct.population, c.continent " +
+                            "from city as ct Join country as c ON ct.CountryCode = c.code  " +
+                            "WHERE ct.district = '" + code2 + "'";
 
 
             // Execute SQL statement

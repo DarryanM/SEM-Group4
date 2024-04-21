@@ -240,6 +240,20 @@ public class AppIntegrationTest
     }
 
     @Test
+    void testgetTopNPopCitiesDistrict()
+    {
+        app.getTopNPopCitiesDistrict("xyz",-2);
+        ArrayList<City> population19 = app.getTopNPopCitiesDistrict("South Korea",3);
+
+        City pop = app.getDistrict("Seoul");
+        assertEquals(pop.population,9981619);
+        assertEquals(pop.name,"Seoul");
+        assertEquals(pop.country, "South Korea");
+        assertEquals(pop.district,"Seoul");
+        app.getTopNPopCitiesDistrict("Seoul", 3);
+    }
+
+    @Test
     void testGetDistrictPopulation() {
         app.getDistrictPopulation("xyz", -10);
         ArrayList<City> districtPopulation11 = app.getDistrictPopulation("Istanbul", 3);
