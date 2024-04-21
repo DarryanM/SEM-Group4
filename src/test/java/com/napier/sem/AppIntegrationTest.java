@@ -201,7 +201,8 @@ public class AppIntegrationTest
     @Test
     void testGetcityPop9()
     {
-        ArrayList<City> cityPop9 = app.getCityPopregi();
+        app.getCityPopregi("xyz", -10);
+        ArrayList<City> cityPop9 = app.getCityPopregi("Eastern Asia",4);
 
         City pop = app.getCity("KOR");
         assertEquals(pop.population, 9981619);
@@ -209,7 +210,7 @@ public class AppIntegrationTest
         assertEquals(pop.name, "Seoul");
         assertEquals(pop.district, "Seoul");
         assertEquals(pop.country, "South Korea");
-        app.getCityPopregi();
+        app.getCityPopregi("Eastern Asia",4);
     }
 
     @Test
