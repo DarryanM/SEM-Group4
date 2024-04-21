@@ -184,6 +184,21 @@ public class AppIntegrationTest
     }
 
     @Test
+    void testGetCityPopconti()
+    {
+        app.getCityPopconti("xyz",-5);
+        ArrayList<City> cityPop8 = app.getCityPopconti("Asia",1);
+
+        City pop = app.getCity("KOR");
+        assertEquals(pop.population, 9981619);
+        assertEquals(pop.countryCode,"KOR");
+        assertEquals(pop.name, "Seoul");
+        assertEquals(pop.district, "Seoul");
+        assertEquals(pop.country, "South Korea");
+        app.getCityPopconti("Asia", 1);
+    }
+
+    @Test
     void testGetcityPop9()
     {
         ArrayList<City> cityPop9 = app.getCityPopregi();
