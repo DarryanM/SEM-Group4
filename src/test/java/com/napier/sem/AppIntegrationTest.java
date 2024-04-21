@@ -366,7 +366,7 @@ public class AppIntegrationTest
     @Test
     void testGetLivingPopRegion()
     {
-        app.getLivingPopContinent("North America");
+        app.getLivingPopRegion("North America");
         ArrayList<City> population27 = app.getLivingPopRegion("Caribbean");
 
         City pop = app.getLivingPop2( "Caribbean");
