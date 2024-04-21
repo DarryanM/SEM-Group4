@@ -424,4 +424,18 @@ public class AppIntegrationTest
         app.getLivingPopRegion("Aruba");
     }
 
+    @Test
+    void testGetTopNCityPopWorld12()
+    {
+        //app.getLivingPopContinent("North America");
+        ArrayList<City> population28 = app.getTopNCityPopWorld12(20);
+
+        City pop = app.getCity( "KOR");
+        assertEquals(pop.population, 9981619);
+        assertEquals(pop.name, "Seoul");
+        assertEquals(pop.country, "South Korea");
+        assertEquals(pop.district, "Seoul");
+        app.getTopNCityPopWorld12(-10);
+    }
+
 }

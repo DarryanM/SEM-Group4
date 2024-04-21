@@ -89,7 +89,7 @@ public class App {
         a.printDistrictPopulation(districtPopulation11);
 
         // Extract Top City Population in the world
-        ArrayList<City> topNCityPopWorld = a.getTopNCityPopWorld12();
+        ArrayList<City> topNCityPopWorld = a.getTopNCityPopWorld12(3);
 
         //Display Results
         a.printGetTopNCityPopWorld12(topNCityPopWorld);
@@ -1000,7 +1000,7 @@ public class App {
      *
      * @return A list of all cities sorted by population in descending order, or null if there is an error.
      */
-    public ArrayList<City> getTopNCityPopWorld12() {
+    public ArrayList<City> getTopNCityPopWorld12(int limit1) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -1009,7 +1009,7 @@ public class App {
                     "WITH city as (select city.name as name, country.name as country, city.district as district, city.population as population, RANK () " +
                             "OVER(ORDER BY population DESC) row_num " +
                             "FROM city inner join country on city.countrycode = country.code) " +
-                            "SELECT * FROM city  WHERE row_num <=10 ";
+                            "SELECT * FROM city ORDER BY population DESC Limit " + limit1 ;
 
 
             // Execute SQL statement
